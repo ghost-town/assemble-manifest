@@ -2,6 +2,20 @@
 
 > Generates JSON and/or YAML manifest files from given source files or directories or source files.
 
+See some of the "[test manifests](https://github.com/assemble/assemble-manifest/tree/master/test/actual)" generated with this task.
+
+
+Use this task to generate:
+
+* Component manifests
+* jQuery package manifests
+* package.json
+* component.json
+* JSON or YAML formatted list of all files in given directories, sorted by type.
+
+Or just use it to keep the metadata in your root `.json` files synchronized: `package.json`, `component.json`, `*.jquery.json` etc.
+
+
 ## Getting Started
 This plugin requires Grunt `~0.4.0`
 
@@ -34,6 +48,8 @@ grunt.initConfig({
   },
 })
 ```
+### Example manifest
+
 
 ### Options
 _On the way..._
