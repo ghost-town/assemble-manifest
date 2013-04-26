@@ -1,10 +1,16 @@
 {
   "name": "test-name",
   "description": "The best Grunt plugin ever.",
-  "version": "1.3.4",
+  "version": "1.7.5",
   "repo": "assemble/assemble",
   "main": [
-    "./lib/assemble.js"
+    "./lib/assemble.js",
+    "test/fixtures/test.css",
+    "test/fixtures/test.css",
+    "test/fixtures/test.html",
+    "test/fixtures/test.js",
+    "test/fixtures/test.less",
+    "test/json_manifest_test.js"
   ],
   "dependencies": {
     "amdefine": "0.0.4",
@@ -19,7 +25,14 @@
   },
   "styles": [],
   "scripts": [],
-  "images": [],
+  "images": [
+    "test/fixtures/test.css",
+    "test/fixtures/test.css",
+    "test/fixtures/test.html",
+    "test/fixtures/test.js",
+    "test/fixtures/test.less",
+    "test/json_manifest_test.js"
+  ],
   "fonts": [],
   "files": []
 }

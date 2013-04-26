@@ -1,80 +1,174 @@
-/* grunt-manifest | Jon Schlinkert | MIT Licensed | credit: */
+/*
+ * grunt-json-manifest
+ * https://github.com/jps/New folder
+ *
+ * Copyright (c) 2013 Jon Schlinkert
+ * Licensed under the MIT license.
+ */
 
 module.exports = function(grunt) {
 
-  var _    = require('lodash');
   var fs   = require('fs');
   var path = require('path');
+  var util = require('util');
+  var _    = require('lodash');
 
-  /* the manifest for component.json is used by Bower */
-  grunt.registerMultiTask('manifest', 'Generates component.json file.', function() {
 
-    // var pkg = grunt.config('pkg');
+  grunt.registerMultiTask('manifest', 'Generates JSON manifests from given src files.', function() {
+
+    grunt.verbose.writeln(util.inspect(this.files, 10, null));
+
     var pkg = grunt.file.readJSON('package.json');
 
-    /* See https://github.com/component/component/wiki/Spec for more info */
     var options = this.options({
+      indent: 2,
+      sorted: false,
       name: pkg.name,
       description: pkg.description,
       version: pkg.version,
       repo: 'assemble/assemble',
-      main: [
-        './lib/assemble.js'
-      ],
-      dependencies: {
-        'amdefine': '0.0.4',
-        'chai': '~1.5.0',
-        'grunt': '~0.4.0',
-        'grunt-contrib-jshint': '~0.1.0',
-        'grunt-contrib-watch': '~0.2.0',
-        'grunt-mocha-test': '~0.2.0',
-        'grunt-release': '~0.2.0',
-        'handlebars': '~1.0.9',
-        'testem': '~0.2.68'
-      },
-      styles: [],
-      scripts: [],
-      images: [],
-      fonts: [],
-      files: []
+      dependencies: pkg.dependencies,
+      devDependencies: pkg.devDependencies,
+      peerDependencies: pkg.peerDependencies 
     });
 
+    var originalCollections = {
+      main: _.union(options.main || [], ['./lib/assemble.js']),
+      styles: _.union(options.styles || [], []),
+      scripts: _.union(options.scripts || [], []),
+      templates: _.union(options.templates || [], []),
+      images: _.union(options.images || [], []),
+      fonts: _.union(options.fonts || [], []),
+      files: _.union(options.files || [], [])
+    };
     var done = this.async();
-    var base = path.join(__dirname, '../new');
 
-    function addFilesToCollection(collection, basePath, localPath) {
-      fs.readdirSync(path.join(basePath, localPath)).forEach(function(file) {
-        if (fs.statSync(path.join(basePath, localPath, file)).isDirectory()) {
-          addFilesToCollection(collection, basePath, path.join(localPath, file));
-        } else {
-          collection.push(path.join("../new", localPath, file));
+    this.files.forEach(function(fp) {
+      grunt.verbose.writeln(util.inspect(fp, 10, null));
+
+      var dest = fp.dest;
+      var collections = {
+        main: [],
+        styles: [],
+        scripts: [],
+        templates: [],
+        images: [],
+        fonts: [],
+        files: []
+      };
+
+      fp.src.forEach(function (src) {
+        grunt.verbose.writeln(src);
+
+        var ext = path.extname(src);
+
+        grunt.verbose.writeln(ext);
+
+        switch (ext) {
+          case ".css":
+          case ".less":
+          case ".stylus":
+          case ".sass":
+          case ".scss":
+            grunt.verbose.writeln('Adding to styles'.magenta);
+            addFileToCollection(collections.styles, src);
+            break;
+          case ".js":
+          case ".coffee": grunt.verbose.writeln('Adding to scripts'.blue);
+            addFileToCollection(collections.scripts, src);
+            break;
+          case ".eot":
+          case ".ttf":
+          case ".woff":
+            grunt.verbose.writeln('Adding to fonts'.gray);
+            addFileToCollection(collections.fonts, src);
+            break;
+          case ".img":
+          case ".png":
+          case ".gif":
+          case ".jpg":
+            grunt.verbose.writeln('Adding to images'.green);
+            addFileToCollection(collections.images, src);
+            break;
+          default:
+            break;
         }
+        addFileToCollection(collections.main, src);
       });
-    }
-    fs.readdirSync(base).forEach(function(dir) {
-      switch (dir) {
-        case "css":
-          addFilesToCollection(options.styles, base, dir);
-          break;
-        case "scripts":
-          addFilesToCollection(options.scripts, base, dir);
-          break;
-        case "font":
-          addFilesToCollection(options.fonts, base, dir);
-          break;
-        case "img":
-          addFilesToCollection(options.images, base, dir);
-          break;
-         default:
-          addFilesToCollection(options.images, base, dir);
-          break;
+
+
+      // Credit: https://github.com/mirkokiefer/canonical-json
+      var copyObjectWithSortedKeys = function(object) {
+        if (isObject(object)) {
+          var newObj = {}
+          var keysSorted = Object.keys(object).sort()
+          var key
+          for (var i in keysSorted) {
+            key = keysSorted[i]
+            if (Object.prototype.hasOwnProperty.call(object, key)) {
+              newObj[key] = copyObjectWithSortedKeys(object[key])
+            }
+          }
+          return newObj
+        } else if (isArray(object)) {
+          return object.map(copyObjectWithSortedKeys)
+        } else {
+          return object
+        }
+      }
+      var isObject = function(a) {
+        return Object.prototype.toString.call(a) === '[object Object]'
+      }
+      var isArray = function(a) {
+        return Object.prototype.toString.call(a) === '[object Array]'
       }
 
-      /* bower needs everything to be pushed in main */
-      addFilesToCollection(options.main, base, dir);
+      options.main      = _.union(collections.main, originalCollections.main);
+      options.styles    = _.union(collections.styles, originalCollections.styles);
+      options.scripts   = _.union(collections.scripts, originalCollections.scripts);
+      options.templates = _.union(collections.templates, originalCollections.templates);
+      options.images    = _.union(collections.images, originalCollections.images);
+      options.fonts     = _.union(collections.fonts, originalCollections.fonts);
+      options.files     = _.union(collections.files, originalCollections.files);
+
+
+      // Remove specified keys from object
+      function removeKeys(obj, keys) {
+        var copyOpts = {};
+        for (key in obj) {
+          if (keys.indexOf(key) == -1) {
+            copyOpts[key] = obj[key];
+          }
+        }
+        return copyOpts;
+      }
+
+      // Remove properties that only belong in config.
+      var filteredOptions = removeKeys(options, ['indent', 'sorted', 'debug']);
+      
+      if (options.debug === true) {
+        optionalOptions = options;
+      } else {
+        optionalOptions = filteredOptions;
+      }
+
+      // Sort JSON alphabetically
+      if (options.sorted === true) {
+        optionalOptions = copyObjectWithSortedKeys(optionalOptions);
+      } else {
+        optionalOptions = optionalOptions;
+      }
+
+      // Create JSON files.
+      var addCollection = JSON.stringify(optionalOptions, null, options.indent);
+      grunt.file.write(dest, addCollection);
+
+      // YAML.stringify
     });
-    var c = JSON.stringify(options, null, 2);
-    fs.writeFileSync(path.join(__dirname, '../component.json'), c, 'utf8');
+
+    function addFileToCollection(collection, file) {
+      collection.push(file);
+    }
 
     done();
   });
