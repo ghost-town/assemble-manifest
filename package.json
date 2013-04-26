@@ -1,23 +1,23 @@
 {
-  "name": "grunt-json-manifest",
-  "description": "The best Grunt plugin ever.",
+  "name": "assemble-stringify",
+  "description": "Generates JSON or YAML manifests from given src files.",
   "version": "0.1.0",
-  "homepage": "https://github.com/jps/New folder",
+  "homepage": "https://github.com/assemble/assemble-stringify",
   "author": {
     "name": "Jon Schlinkert",
     "url": "http://github.com/jonschlinkert/"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/jps/New folder.git"
+    "url": "git://github.com/assemble/assemble-stringify.git"
   },
   "bugs": {
-    "url": "https://github.com/jps/New folder/issues"
+    "url": "https://github.com/assemble/assemble-stringify/issues"
   },
   "licenses": [
     {
       "type": "MIT",
-      "url": "https://github.com/jps/New folder/blob/master/LICENSE-MIT"
+      "url": "https://github.com/assemble/assemble-stringify/blob/master/LICENSE-MIT"
     }
   ],
   "main": "Gruntfile.js",
@@ -28,13 +28,13 @@
     "test": "grunt test"
   },
   "devDependencies": {
-    "lodash": "~1.1.1",
+    "grunt": "~0.4.1",
     "grunt-contrib-clean": "~0.4.1",
     "grunt-contrib-jshint": "~0.4.3",
-    "grunt": "~0.4.1",
     "grunt-contrib-nodeunit": "~0.1.2",
+    "json2yaml": "~1.0.1",
     "js-yaml": "~2.0.4",
-    "json2yaml": "~1.0.1"
+    "lodash": "~1.1.1"
   },
   "peerDependencies": {
     "grunt": "~0.4.1"

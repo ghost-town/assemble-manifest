@@ -1,5 +1,5 @@
 /*
- * grunt-json-manifest
+ * assemble-manifest
  * https://github.com/jps/New folder
  *
  * Copyright (c) 2013 Jon Schlinkert
@@ -27,10 +27,10 @@ module.exports = function(grunt) {
     // Configuration to be run (and then tested).
     manifest: {
       options: {
-        debug: false,
+        debug: true,
         indent: 2,
         sorted: false,
-        kind: 'JSON',
+        output: 'json',
         version: '1.7.5',
         dependencies: {
           'amdefine': '0.0.4',
@@ -50,6 +50,7 @@ module.exports = function(grunt) {
           styles: [
             "upstage.css"
           ],
+          // dependencies: undefined,
           scripts: [],
           images: [],
           fonts: [],
@@ -63,7 +64,7 @@ module.exports = function(grunt) {
       yaml: {
         options: {
           name: 'YAML files',
-          kind: 'yml',
+          output: 'yml',
           styles: [
             "upstage.css"
           ],
@@ -75,6 +76,12 @@ module.exports = function(grunt) {
         files: {
           'test/actual/circle.yml': ['test/fixtures/*.*'],
           'test/actual/square.yml': ['test/**/*.*']
+        }
+      },
+      pkg: {
+        options: { scripts: [] },
+        files: {
+          'test/actual/component.json': ['tasks/*.*']
         }
       },
       main: {
@@ -98,7 +105,7 @@ module.exports = function(grunt) {
 
     // Configuration to be run (and then tested).
     clean: {
-      json: ['test/actual/*.json']
+      json: ['test/actual/*.{json,yml}']
     }
   });
 
