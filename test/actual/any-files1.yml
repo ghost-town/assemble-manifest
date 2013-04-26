@@ -1,9 +1,6 @@
 ---
-  debug: true
-  indent: 2
-  sorted: false
   output: "yml"
-  name: "YAML files"
+  name: "YAML Manifest"
   description: "Generates JSON and/or YAML manifest files from given source files or directories or source files."
   version: "1.7.5"
   repo: "assemble/assemble"
@@ -33,11 +30,23 @@
     - "upstage.css"
   scripts: 
     - "test/fixtures/test.js"
+    - "scripts.js"
   images: 
+    - "test/fixtures/apple-touch-icon-114-precomposed.png"
+    - "test/fixtures/apple-touch-icon-144-precomposed.png"
+    - "test/fixtures/apple-touch-icon-57-precomposed.png"
+    - "test/fixtures/apple-touch-icon-72-precomposed.png"
+    - "styles.css"
   fonts: 
     - "test/fixtures/arial.woff"
+    - "font.woff"
   files: 
+    - "presentation.pdf"
   main: 
+    - "test/fixtures/apple-touch-icon-114-precomposed.png"
+    - "test/fixtures/apple-touch-icon-144-precomposed.png"
+    - "test/fixtures/apple-touch-icon-57-precomposed.png"
+    - "test/fixtures/apple-touch-icon-72-precomposed.png"
     - "test/fixtures/arial.woff"
     - "test/fixtures/test.css"
     - "test/fixtures/test.html"

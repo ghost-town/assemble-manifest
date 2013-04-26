@@ -1,9 +1,6 @@
 {
-  "debug": true,
-  "indent": 2,
-  "sorted": false,
   "output": "json",
-  "name": "assemble-manifest",
+  "name": "Component Manifest",
   "description": "Generates JSON and/or YAML manifest files from given source files or directories or source files.",
   "version": "1.7.5",
   "repo": "assemble/assemble",
@@ -30,13 +27,13 @@
   "peerDependencies": {
     "grunt": "~0.4.1"
   },
-  "scripts": [
-    "tasks/manifest.js"
-  ],
   "main": [
     "tasks/manifest.js"
   ],
   "styles": [],
+  "scripts": [
+    "tasks/manifest.js"
+  ],
   "templates": [],
   "images": [],
   "fonts": [],

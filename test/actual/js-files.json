@@ -1,9 +1,6 @@
 {
-  "debug": true,
-  "indent": 2,
-  "sorted": false,
   "output": "json",
-  "name": "Main Target",
+  "name": "Theme Manifest",
   "description": "Generates JSON and/or YAML manifest files from given source files or directories or source files.",
   "version": "1.7.5",
   "repo": "assemble/assemble",
@@ -30,9 +27,13 @@
   "peerDependencies": {
     "grunt": "~0.4.1"
   },
-  "main": [],
+  "main": [
+    "test/fixtures/test.js"
+  ],
   "styles": [],
-  "scripts": [],
+  "scripts": [
+    "test/fixtures/test.js"
+  ],
   "templates": [],
   "images": [],
   "fonts": [],

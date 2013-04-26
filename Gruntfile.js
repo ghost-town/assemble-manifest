@@ -27,7 +27,6 @@ module.exports = function(grunt) {
     // Configuration to be run (and then tested).
     manifest: {
       options: {
-        debug: true,
         indent: 2,
         sorted: false,
         output: 'json',
@@ -45,60 +44,53 @@ module.exports = function(grunt) {
         }
       },
       component: {
-        options: { scripts: [] },
+        options: { 
+          name: 'Component Manifest' 
+        },
         files: {
           'test/actual/component.json': ['tasks/*.*']
         }
       },
-      pkg: {
+      images: {
         options: {
-          name: 'Component Target',
-          styles: [
-            "upstage.css"
-          ],
-          // dependencies: undefined,
-          scripts: [],
-          images: [],
-          fonts: [],
-          files: []
+          name: 'Images Manifest'
         },
         files: {
-          'test/actual/one.json': ['test/fixtures/*.*'],
-          'test/actual/two.json': ['test/**/*.*']
+          'test/actual/image-files.json': ['test/fixtures/*.{jpg,png,gif}'],
         }
       },
       yaml: {
         options: {
-          name: 'YAML files',
+          name: 'YAML Manifest',
           output: 'yml',
           styles: [
             "upstage.css"
           ],
-          scripts: [],
-          images: [],
-          fonts: [],
-          files: []
+          scripts: ['scripts.js'],
+          images: ['styles.css'],
+          fonts: ['font.woff'],
+          files: ['presentation.pdf']
         },
         files: {
-          'test/actual/circle.yml': ['test/fixtures/*.*'],
-          'test/actual/square.yml': ['test/**/*.*']
+          'test/actual/any-files1.yml': ['test/fixtures/*.*'],
+          'test/actual/any-files2.yml': ['test/**/*.*']
         }
       },
       main: {
         options: {
-          name: 'Main Target'
+          name: 'Main Files'
         },
         files: {
-          'test/actual/main.json': ['test/main/*.*']
+          'test/actual/files5.json': ['test/main/*.*']
         }
       },
       theme: {
         options: {
-          name: 'Theme Target'
+          name: 'Theme Manifest'
         },
         files: {
-          'test/actual/css.json': ['test/fixtures/*.css'],
-          'test/actual/js.json': ['test/fixtures/*.js']
+          'test/actual/css-files.json': ['test/fixtures/*.css'],
+          'test/actual/js-files.json': ['test/fixtures/*.js']
         }
       }
     },

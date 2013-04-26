@@ -52,7 +52,14 @@ grunt.initConfig({
 
 
 ### Options
-_On the way..._
+_Documentation forthcoming_
+
+* sorted
+* indent
+* debug
+
+* "collections"
+
 
 ### Usage Examples
 
