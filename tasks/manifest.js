@@ -31,7 +31,6 @@ module.exports = function(grunt) {
     } 
     var pkg = readOptionalJSON('package.json');
 
-
     // Merge task-specific and/or target-specific options with these defaults.
     var options = this.options({
       debug: false,

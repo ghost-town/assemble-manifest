@@ -1,0 +1,46 @@
+---
+  debug: true
+  indent: 2
+  sorted: false
+  output: "yml"
+  name: "YAML files"
+  description: "Generates JSON and/or YAML manifest files from given source files or directories or source files."
+  version: "1.7.5"
+  repo: "assemble/assemble"
+  dependencies: 
+    amdefine: "0.0.4"
+    chai: "~1.5.0"
+    grunt: "~0.4.0"
+    grunt-contrib-jshint: "~0.1.0"
+    grunt-contrib-watch: "~0.2.0"
+    grunt-mocha-test: "~0.2.0"
+    grunt-release: "~0.2.0"
+    handlebars: "~1.0.9"
+    testem: "~0.2.68"
+  devDependencies: 
+    grunt: "~0.4.1"
+    grunt-contrib-clean: "~0.4.1"
+    grunt-contrib-jshint: "~0.4.3"
+    grunt-contrib-nodeunit: "~0.1.2"
+    json2yaml: "~1.0.1"
+    js-yaml: "~2.0.4"
+    lodash: "~1.1.1"
+  peerDependencies: 
+    grunt: "~0.4.1"
+  styles: 
+    - "test/fixtures/test.css"
+    - "test/fixtures/test.less"
+    - "upstage.css"
+  scripts: 
+    - "test/fixtures/test.js"
+  images: 
+  fonts: 
+    - "test/fixtures/arial.woff"
+  files: 
+  main: 
+    - "test/fixtures/arial.woff"
+    - "test/fixtures/test.css"
+    - "test/fixtures/test.html"
+    - "test/fixtures/test.js"
+    - "test/fixtures/test.less"
+  templates: 

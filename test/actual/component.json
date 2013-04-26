@@ -1,0 +1,44 @@
+{
+  "debug": true,
+  "indent": 2,
+  "sorted": false,
+  "output": "json",
+  "name": "assemble-manifest",
+  "description": "Generates JSON and/or YAML manifest files from given source files or directories or source files.",
+  "version": "1.7.5",
+  "repo": "assemble/assemble",
+  "dependencies": {
+    "amdefine": "0.0.4",
+    "chai": "~1.5.0",
+    "grunt": "~0.4.0",
+    "grunt-contrib-jshint": "~0.1.0",
+    "grunt-contrib-watch": "~0.2.0",
+    "grunt-mocha-test": "~0.2.0",
+    "grunt-release": "~0.2.0",
+    "handlebars": "~1.0.9",
+    "testem": "~0.2.68"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-clean": "~0.4.1",
+    "grunt-contrib-jshint": "~0.4.3",
+    "grunt-contrib-nodeunit": "~0.1.2",
+    "json2yaml": "~1.0.1",
+    "js-yaml": "~2.0.4",
+    "lodash": "~1.1.1"
+  },
+  "peerDependencies": {
+    "grunt": "~0.4.1"
+  },
+  "scripts": [
+    "tasks/manifest.js"
+  ],
+  "main": [
+    "tasks/manifest.js"
+  ],
+  "styles": [],
+  "templates": [],
+  "images": [],
+  "fonts": [],
+  "files": []
+}
