@@ -1,6 +1,6 @@
 # assemble-manifest
 
-> Generates JSON or YAML manifests from given src files.
+> Generates JSON and/or YAML manifest files from given source files or directories or source files.
 
 ## Getting Started
 This plugin requires Grunt `~0.4.0`

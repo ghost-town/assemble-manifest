@@ -1,6 +1,6 @@
 {
   "name": "assemble-stringify",
-  "description": "Generates JSON or YAML manifests from given src files.",
+  "description": "Generates JSON and/or YAML manifest files from given source files or directories or source files.",
   "version": "0.1.0",
   "homepage": "https://github.com/assemble/assemble-stringify",
   "author": {
