@@ -16,8 +16,8 @@ module.exports = function(grunt) {
     jshint: {
       all: [
         'Gruntfile.js',
-        'tasks/*.js',
-        '<%= nodeunit.tests %>'
+        'tasks/*.js'
+        // '<%= nodeunit.tests %>'
       ],
       options: {
         jshintrc: '.jshintrc'
@@ -87,11 +87,16 @@ module.exports = function(grunt) {
   });
 
   // These plugins provide necessary tasks.
+  grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-clean');
 
   // Actually load this plugin's task(s).
   grunt.loadTasks('tasks');
 
   // By default, lint and run all tests.
-  grunt.registerTask('default', ['clean', 'manifest']);
+  grunt.registerTask('default', ['jshint', 'clean', 'manifest']);
+
+  // By default, lint and run all tests.
+  // grunt.registerTask('test', ['default', 'nodeunit']);
+
 };

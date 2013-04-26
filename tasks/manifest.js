@@ -100,28 +100,28 @@ module.exports = function(grunt) {
       // Credit: https://github.com/mirkokiefer/canonical-json
       var copyObjectWithSortedKeys = function(object) {
         if (isObject(object)) {
-          var newObj = {}
-          var keysSorted = Object.keys(object).sort()
-          var key
+          var newObj = {};
+          var keysSorted = Object.keys(object).sort();
+          var key;
           for (var i in keysSorted) {
-            key = keysSorted[i]
+            key = keysSorted[i];
             if (Object.prototype.hasOwnProperty.call(object, key)) {
-              newObj[key] = copyObjectWithSortedKeys(object[key])
+              newObj[key] = copyObjectWithSortedKeys(object[key]);
             }
           }
-          return newObj
+          return newObj;
         } else if (isArray(object)) {
-          return object.map(copyObjectWithSortedKeys)
+          return object.map(copyObjectWithSortedKeys);
         } else {
-          return object
+          return object;
         }
-      }
+      };
       var isObject = function(a) {
-        return Object.prototype.toString.call(a) === '[object Object]'
-      }
+        return Object.prototype.toString.call(a) === '[object Object]';
+      };
       var isArray = function(a) {
-        return Object.prototype.toString.call(a) === '[object Array]'
-      }
+        return Object.prototype.toString.call(a) === '[object Array]';
+      };
 
       options.main      = _.union(collections.main, originalCollections.main);
       options.styles    = _.union(collections.styles, originalCollections.styles);
@@ -135,8 +135,8 @@ module.exports = function(grunt) {
       // Remove specified keys from object
       function removeKeys(obj, keys) {
         var copyOpts = {};
-        for (key in obj) {
-          if (keys.indexOf(key) == -1) {
+        for (var key in obj) {
+          if (keys.indexOf(key) === -1) {
             copyOpts[key] = obj[key];
           }
         }
@@ -145,7 +145,7 @@ module.exports = function(grunt) {
 
       // Remove properties that only belong in config.
       var filteredOptions = removeKeys(options, ['indent', 'sorted', 'debug']);
-      
+      var optionalOptions;
       if (options.debug === true) {
         optionalOptions = options;
       } else {
