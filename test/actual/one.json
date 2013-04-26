@@ -1,0 +1,46 @@
+{
+  "dependencies": {
+    "amdefine": "0.0.4",
+    "chai": "~1.5.0",
+    "grunt": "~0.4.0",
+    "grunt-contrib-jshint": "~0.1.0",
+    "grunt-contrib-watch": "~0.2.0",
+    "grunt-mocha-test": "~0.2.0",
+    "grunt-release": "~0.2.0",
+    "handlebars": "~1.0.9",
+    "testem": "~0.2.68"
+  },
+  "description": "The best Grunt plugin ever.",
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "lodash": "*"
+  },
+  "files": [],
+  "fonts": [
+    "test/fixtures/arial.woff"
+  ],
+  "images": [],
+  "main": [
+    "test/fixtures/arial.woff",
+    "test/fixtures/test.css",
+    "test/fixtures/test.html",
+    "test/fixtures/test.js",
+    "test/fixtures/test.less",
+    "./lib/assemble.js"
+  ],
+  "name": "Component Target",
+  "peerDependencies": {
+    "grunt": "~0.4.1"
+  },
+  "repo": "assemble/assemble",
+  "scripts": [
+    "test/fixtures/test.js"
+  ],
+  "styles": [
+    "test/fixtures/test.css",
+    "test/fixtures/test.less",
+    "upstage.css"
+  ],
+  "templates": [],
+  "version": "1.7.5"
+}

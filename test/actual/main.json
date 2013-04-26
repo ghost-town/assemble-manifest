@@ -1,0 +1,33 @@
+{
+  "dependencies": {
+    "amdefine": "0.0.4",
+    "chai": "~1.5.0",
+    "grunt": "~0.4.0",
+    "grunt-contrib-jshint": "~0.1.0",
+    "grunt-contrib-watch": "~0.2.0",
+    "grunt-mocha-test": "~0.2.0",
+    "grunt-release": "~0.2.0",
+    "handlebars": "~1.0.9",
+    "testem": "~0.2.68"
+  },
+  "description": "The best Grunt plugin ever.",
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "lodash": "*"
+  },
+  "files": [],
+  "fonts": [],
+  "images": [],
+  "main": [
+    "./lib/assemble.js"
+  ],
+  "name": "Main Target",
+  "peerDependencies": {
+    "grunt": "~0.4.1"
+  },
+  "repo": "assemble/assemble",
+  "scripts": [],
+  "styles": [],
+  "templates": [],
+  "version": "1.7.5"
+}
