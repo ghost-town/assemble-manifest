@@ -42,11 +42,12 @@ _On the way..._
 
 Example target to build a `component.json` from a `package.json`. You may: 
 
-1. Do a one-to-one transfer of objects and properties
-2. Override any objects or properties in the options by simply adding the new value to the options. 
-3. Remove any objects or properties in the options by making the value `undefined` (this is a quick fix, will revisit but it works for now.)
-4. Define new objects and properties in the options block.
-5. Output to either YAML or JSON format.
+ * Do a one-to-one transfer of objects and properties
+ * Override any objects or properties in the options by simply adding the new value to the options. 
+ * Remove any objects or properties in the options by making the value `undefined` (this is a quick fix, will revisit but it works for now.)
+ * Define new objects and properties in the options block.
+ * Output to either YAML or JSON format.
+ * Generate arrays of files with specific extensions from given source directories. Currently limited to certain file types, but may be expanded to be more dynamic if there is a use case. 
 
 ``` js
 manifest: {
