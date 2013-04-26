@@ -30,6 +30,7 @@ module.exports = function(grunt) {
         debug: false,
         indent: 2,
         sorted: false,
+        kind: 'JSON',
         version: '1.7.5',
         dependencies: {
           'amdefine': '0.0.4',
@@ -45,7 +46,6 @@ module.exports = function(grunt) {
       },
       component: {
         options: {
-          sorted: true,
           name: 'Component Target',
           styles: [
             "upstage.css"
@@ -60,9 +60,25 @@ module.exports = function(grunt) {
           'test/actual/two.json': ['test/**/*.*']
         }
       },
+      yaml: {
+        options: {
+          name: 'YAML files',
+          kind: 'yml',
+          styles: [
+            "upstage.css"
+          ],
+          scripts: [],
+          images: [],
+          fonts: [],
+          files: []
+        },
+        files: {
+          'test/actual/circle.yml': ['test/fixtures/*.*'],
+          'test/actual/square.yml': ['test/**/*.*']
+        }
+      },
       main: {
         options: {
-          sorted: true,
           name: 'Main Target'
         },
         files: {

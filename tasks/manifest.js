@@ -12,28 +12,29 @@ module.exports = function(grunt) {
   var path = require('path');
   var util = require('util');
   var _    = require('lodash');
-
+  var YAML = require('json2yaml');
 
   grunt.registerMultiTask('manifest', 'Generates JSON manifests from given src files.', function() {
-
-    grunt.verbose.writeln(util.inspect(this.files, 10, null));
+    grunt.verbose.ok(util.inspect(this.files, 10, null));
 
     var pkg = grunt.file.readJSON('package.json');
 
+    // Merge task-specific and/or target-specific options with these defaults.
     var options = this.options({
       indent: 2,
       sorted: false,
+      kind: 'JSON',
       name: pkg.name,
       description: pkg.description,
       version: pkg.version,
       repo: 'assemble/assemble',
       dependencies: pkg.dependencies,
       devDependencies: pkg.devDependencies,
-      peerDependencies: pkg.peerDependencies 
+      peerDependencies: pkg.peerDependencies
     });
 
     var originalCollections = {
-      main: _.union(options.main || [], ['./lib/assemble.js']),
+      main: _.union(options.main || [], []),
       styles: _.union(options.styles || [], []),
       scripts: _.union(options.scripts || [], []),
       templates: _.union(options.templates || [], []),
@@ -42,6 +43,7 @@ module.exports = function(grunt) {
       files: _.union(options.files || [], [])
     };
     var done = this.async();
+    grunt.verbose.writeflags(options, 'Options');
 
     this.files.forEach(function(fp) {
       grunt.verbose.writeln(util.inspect(fp, 10, null));
@@ -57,11 +59,18 @@ module.exports = function(grunt) {
         files: []
       };
 
-      fp.src.forEach(function (src) {
+      fp.src.forEach(function(src) {
+
+        // Verify that files exist. Warn if a source file/pattern was invalid.
+        if (!grunt.file.exists(src)) {
+          grunt.log.warn('Source file "' + src + '" not found.');
+          return false;
+        } else {
+          return true;
+        }
         grunt.verbose.writeln(src);
 
         var ext = path.extname(src);
-
         grunt.verbose.writeln(ext);
 
         switch (ext) {
@@ -74,7 +83,8 @@ module.exports = function(grunt) {
             addFileToCollection(collections.styles, src);
             break;
           case ".js":
-          case ".coffee": grunt.verbose.writeln('Adding to scripts'.blue);
+          case ".coffee":
+            grunt.verbose.writeln('Adding to scripts'.yellow);
             addFileToCollection(collections.scripts, src);
             break;
           case ".eot":
@@ -123,13 +133,13 @@ module.exports = function(grunt) {
         return Object.prototype.toString.call(a) === '[object Array]';
       };
 
-      options.main      = _.union(collections.main, originalCollections.main);
-      options.styles    = _.union(collections.styles, originalCollections.styles);
-      options.scripts   = _.union(collections.scripts, originalCollections.scripts);
+      options.main = _.union(collections.main, originalCollections.main);
+      options.styles = _.union(collections.styles, originalCollections.styles);
+      options.scripts = _.union(collections.scripts, originalCollections.scripts);
       options.templates = _.union(collections.templates, originalCollections.templates);
-      options.images    = _.union(collections.images, originalCollections.images);
-      options.fonts     = _.union(collections.fonts, originalCollections.fonts);
-      options.files     = _.union(collections.files, originalCollections.files);
+      options.images = _.union(collections.images, originalCollections.images);
+      options.fonts = _.union(collections.fonts, originalCollections.fonts);
+      options.files = _.union(collections.files, originalCollections.files);
 
 
       // Remove specified keys from object
@@ -145,6 +155,7 @@ module.exports = function(grunt) {
 
       // Remove properties that only belong in config.
       var filteredOptions = removeKeys(options, ['indent', 'sorted', 'debug']);
+
       var optionalOptions;
       if (options.debug === true) {
         optionalOptions = options;
@@ -159,11 +170,20 @@ module.exports = function(grunt) {
         optionalOptions = optionalOptions;
       }
 
-      // Create JSON files.
-      var addCollection = JSON.stringify(optionalOptions, null, options.indent);
-      grunt.file.write(dest, addCollection);
 
-      // YAML.stringify
+      // Option to create JSON or YAML.
+      var optionsKind = ((options.kind).toLowerCase());
+      var stringifyFile;
+      if (optionsKind === 'yaml' || optionsKind === 'yml') {
+        stringifyFile = YAML.stringify;
+      } else {
+        stringifyFile = JSON.stringify;
+      }
+
+      // Create JSON files.
+      var addCollection = stringifyFile(optionalOptions, null, options.indent);
+      grunt.log.write('Manifest "' + dest + '" created...'); grunt.log.ok();
+      grunt.file.write(dest, addCollection);
     });
 
     function addFileToCollection(collection, file) {
@@ -173,4 +193,3 @@ module.exports = function(grunt) {
     done();
   });
 };
-

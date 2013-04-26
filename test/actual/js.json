@@ -1,4 +1,5 @@
 {
+  "kind": "JSON",
   "name": "Theme Target",
   "description": "The best Grunt plugin ever.",
   "version": "1.7.5",
@@ -18,19 +19,17 @@
     "lodash": "~1.1.1",
     "grunt-contrib-clean": "~0.4.1",
     "grunt-contrib-jshint": "~0.4.3",
-    "grunt": "~0.4.1"
+    "grunt": "~0.4.1",
+    "grunt-contrib-nodeunit": "~0.1.2",
+    "js-yaml": "~2.0.4",
+    "json2yaml": "~1.0.1"
   },
   "peerDependencies": {
     "grunt": "~0.4.1"
   },
-  "main": [
-    "test/fixtures/test.js",
-    "./lib/assemble.js"
-  ],
+  "main": [],
   "styles": [],
-  "scripts": [
-    "test/fixtures/test.js"
-  ],
+  "scripts": [],
   "templates": [],
   "images": [],
   "fonts": [],

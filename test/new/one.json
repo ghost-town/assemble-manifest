@@ -1,6 +1,5 @@
 {
-  "kind": "JSON",
-  "name": "Main Target",
+  "name": "Component Target",
   "description": "The best Grunt plugin ever.",
   "version": "1.7.5",
   "repo": "assemble/assemble",
@@ -20,18 +19,20 @@
     "grunt-contrib-clean": "~0.4.1",
     "grunt-contrib-jshint": "~0.4.3",
     "grunt": "~0.4.1",
-    "grunt-contrib-nodeunit": "~0.1.2",
-    "js-yaml": "~2.0.4",
-    "json2yaml": "~1.0.1"
+    "grunt-contrib-nodeunit": "~0.1.2"
   },
   "peerDependencies": {
     "grunt": "~0.4.1"
   },
-  "main": [],
-  "styles": [],
+  "styles": [
+    "upstage.css"
+  ],
   "scripts": [],
-  "templates": [],
   "images": [],
   "fonts": [],
-  "files": []
+  "files": [],
+  "main": [
+    "./lib/assemble.js"
+  ],
+  "templates": []
 }
