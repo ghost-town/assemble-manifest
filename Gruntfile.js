@@ -45,6 +45,12 @@ module.exports = function(grunt) {
         }
       },
       component: {
+        options: { scripts: [] },
+        files: {
+          'test/actual/component.json': ['tasks/*.*']
+        }
+      },
+      pkg: {
         options: {
           name: 'Component Target',
           styles: [
@@ -76,12 +82,6 @@ module.exports = function(grunt) {
         files: {
           'test/actual/circle.yml': ['test/fixtures/*.*'],
           'test/actual/square.yml': ['test/**/*.*']
-        }
-      },
-      pkg: {
-        options: { scripts: [] },
-        files: {
-          'test/actual/component.json': ['tasks/*.*']
         }
       },
       main: {

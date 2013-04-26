@@ -39,11 +39,64 @@ grunt.initConfig({
 _On the way..._
 
 ### Usage Examples
-_On the way..._
+
+Example target to build a `component.json` from a `package.json`. You may: 
+
+1. Do a one-to-one transfer of objects and properties
+2. Override any objects or properties in the options by simply adding the new value to the options. 
+3. Remove any objects or properties in the options by making the value `undefined` (this is a quick fix, will revisit but it works for now.)
+4. Define new objects and properties in the options block.
+5. Output to either YAML or JSON format.
+
+``` js
+manifest: {
+  options: {
+    debug: true,
+    indent: 2,
+    sorted: false,
+    output: 'json',  // json or yaml, case insensitive
+    version: '0.1.0', // keep versions synched
+    devDependencies: undefined, // remove object
+  },
+  // build component.json from package.json
+  component: {
+    files: {
+      'component.json': ['package.json']
+    }
+  }
+}
+```
 
 #### Default Options
-_On the way..._
 
+``` js
+manifest: {
+  options: {
+    debug: true,
+    indent: 2,
+    sorted: false,
+    output: 'json',
+    version: '1.7.5',
+    dependencies: {
+      'amdefine': '0.0.4',
+      'chai': '~1.5.0',
+      'grunt': '~0.4.0',
+      'grunt-contrib-jshint': '~0.1.0',
+      'grunt-contrib-watch': '~0.2.0',
+      'grunt-mocha-test': '~0.2.0',
+      'grunt-release': '~0.2.0',
+      'handlebars': '~1.0.9',
+      'testem': '~0.2.68'
+    }
+  },
+  // build component.json from package.json
+  component: {
+    files: {
+      'component.json': ['package.json']
+    }
+  }
+}
+```
 
 #### Custom Options
 _On the way..._
