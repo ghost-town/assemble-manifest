@@ -12,7 +12,7 @@ module.exports = function(grunt) {
   var fs   = require('fs');
   var path = require('path');
   var util = require('util');
-  var _    = require('lodash');
+  var _    = grunt.util._;
   var YAML = require('json2yaml');
 
 
@@ -33,10 +33,6 @@ module.exports = function(grunt) {
 
     // Merge task-specific and/or target-specific options with these defaults.
     var options = this.options({
-      debug: false,
-      indent: 2,
-      sorted: false,
-      output: 'json',
       name: pkg.name,
       description: pkg.description,
       version: pkg.version,
@@ -44,7 +40,14 @@ module.exports = function(grunt) {
       dependencies: pkg.dependencies,
       devDependencies: pkg.devDependencies,
       peerDependencies: pkg.peerDependencies,
-      optionalDependencies: pkg.optionalDependencies
+      optionalDependencies: pkg.optionalDependencies,
+
+      // Task config options
+      debug: false,
+      indent: 2,
+      sorted: false,
+      omit: [],
+      output: 'json',
     });
 
     var originalCollections = {
@@ -167,20 +170,8 @@ module.exports = function(grunt) {
         return Object.prototype.toString.call(a) === '[object Array]';
       };
 
-      // Remove specified keys from object
-      function removeKeys(obj, keys) {
-        var copyOpts = {};
-        for (var key in obj) {
-          if (keys.indexOf(key) === -1) {
-            copyOpts[key] = obj[key];
-          }
-        }
-        return copyOpts;
-      }
-
-      // Remove properties that only belong in config.
-      var filteredOptions = removeKeys(options, ['indent', 'sorted', 'debug']);
-    
+      var defaultOmissions = _.defaults(['indent', 'sorted', 'debug', 'omit', 'output']);
+      var filteredOptions = _.omit(options, options.omit, defaultOmissions);
       var optionalOptions;
       if (options.debug === true) {
         optionalOptions = options;

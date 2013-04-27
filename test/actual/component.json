@@ -1,5 +1,4 @@
 {
-  "output": "json",
   "name": "Component Manifest",
   "description": "Generates JSON and/or YAML manifest files from given source files or directories or source files.",
   "version": "1.7.5",
@@ -27,6 +26,16 @@
   "peerDependencies": {
     "grunt": "~0.4.1"
   },
+  "debug": true,
+  "indent": 2,
+  "sorted": false,
+  "omit": [
+    "styles",
+    "scripts",
+    "fonts",
+    "files"
+  ],
+  "output": "json",
   "main": [
     "tasks/manifest.js"
   ],

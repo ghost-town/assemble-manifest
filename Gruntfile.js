@@ -27,9 +27,7 @@ module.exports = function(grunt) {
     // Configuration to be run (and then tested).
     manifest: {
       options: {
-        indent: 2,
-        sorted: false,
-        output: 'json',
+        debug: true,
         version: '1.7.5',
         dependencies: {
           'amdefine': '0.0.4',
@@ -41,10 +39,15 @@ module.exports = function(grunt) {
           'grunt-release': '~0.2.0',
           'handlebars': '~1.0.9',
           'testem': '~0.2.68'
-        }
+        },
+        omit: ['devDependencies', 'dependencies'],
+        indent: 2,
+        sorted: false,
+        output: 'json'
       },
       component: {
         options: { 
+          omit: ['styles', 'scripts', 'fonts', 'files'],
           name: 'Component Manifest' 
         },
         files: {
@@ -53,6 +56,7 @@ module.exports = function(grunt) {
       },
       images: {
         options: {
+          omit: ['images', 'dependencies'],
           name: 'Images Manifest'
         },
         files: {

@@ -1,5 +1,4 @@
 ---
-  output: "yml"
   name: "YAML Manifest"
   description: "Generates JSON and/or YAML manifest files from given source files or directories or source files."
   version: "1.7.5"
@@ -24,6 +23,13 @@
     lodash: "~1.1.1"
   peerDependencies: 
     grunt: "~0.4.1"
+  debug: true
+  indent: 2
+  sorted: false
+  omit: 
+    - "devDependencies"
+    - "dependencies"
+  output: "yml"
   styles: 
     - "test/fixtures/test.css"
     - "test/fixtures/test.less"
@@ -44,7 +50,6 @@
   files: 
     - "presentation.pdf"
   main: 
-    - "test/actual/any-files1.yml"
     - "test/actual/component.json"
     - "test/actual/image-files.json"
     - "test/fixtures/apple-touch-icon-114-precomposed.png"

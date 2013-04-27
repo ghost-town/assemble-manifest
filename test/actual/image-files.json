@@ -1,5 +1,4 @@
 {
-  "output": "json",
   "name": "Images Manifest",
   "description": "Generates JSON and/or YAML manifest files from given source files or directories or source files.",
   "version": "1.7.5",
@@ -27,6 +26,14 @@
   "peerDependencies": {
     "grunt": "~0.4.1"
   },
+  "debug": true,
+  "indent": 2,
+  "sorted": false,
+  "omit": [
+    "images",
+    "dependencies"
+  ],
+  "output": "json",
   "main": [
     "test/fixtures/apple-touch-icon-114-precomposed.png",
     "test/fixtures/apple-touch-icon-144-precomposed.png",
