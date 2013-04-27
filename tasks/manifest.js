@@ -20,15 +20,6 @@ module.exports = function(grunt) {
 
     grunt.verbose.writeln(util.inspect(this.files, 10, null));
 
-    // readOptionalJSON by Ben Alman https://gist.github.com/2876125
-    function readOptionalJSON(filepath) {
-      var data = {};
-      try {
-        data = grunt.file.readJSON(filepath);
-        grunt.verbose.write("Reading " + filepath + "...").ok();
-      } catch (e) {}
-      return data;
-    } 
     var pkg = readOptionalJSON('package.json');
 
     // Merge task-specific and/or target-specific options with these defaults.
@@ -53,7 +44,6 @@ module.exports = function(grunt) {
       debug: false,
       indent: 2,
       sorted: false,
-      exclude: [],
       output: 'json',
     });
 
@@ -61,6 +51,8 @@ module.exports = function(grunt) {
     if (options.manifestrc) {
       options = grunt.util._.extend(options, grunt.file.readJSON(options.manifestrc));
     }
+
+    options.exclude = mergeOptionsArrays(this.target, 'exclude');
 
     var originalCollections = {
       main       : _.union(options.main || [], []),
@@ -123,13 +115,13 @@ module.exports = function(grunt) {
             addFileToCollection(collections.images, src);
             break;
           case ".js":
-          case ".coffee": 
+          case ".coffee":
             grunt.verbose.writeln('Adding to javascripts collection'.yellow);
             addFileToCollection(collections.javascripts, src);
             break;
           case ".md":
-          case ".markd": 
-          case ".markdown": 
+          case ".markd":
+          case ".markdown":
             grunt.verbose.writeln('Adding to markdown collection'.yellow);
             addFileToCollection(collections.markdown, src);
             break;
@@ -165,21 +157,6 @@ module.exports = function(grunt) {
       options.fonts       = _.union(collections.fonts, originalCollections.fonts);
       options.files       = _.union(collections.files, originalCollections.files);
 
-      function sortObject(o) {
-        var sorted = {},
-        key, a = [];
-        for (key in o) {
-          if (o.hasOwnProperty(key)) {
-            a.push(key);
-          }
-        }
-        a.sort();
-        for (key = 0; key < a.length; key++) {
-          sorted[a[key]] = o[a[key]];
-        }
-        return sorted;
-      }
-
       // Properties that are excluded from output by default,
       // unless debug is set to "true"
       var defaultOmissions = _.defaults([
@@ -213,18 +190,57 @@ module.exports = function(grunt) {
       } else {
         stringifyFile = JSON.stringify;
       }
-      
+
       // Create JSON files.
       var addCollection = stringifyFile(optionalOptions, null, options.indent);
       grunt.file.write(dest, addCollection);
       grunt.log.write('Manifest "' + dest + '" created...'); grunt.log.ok();
     });
 
-    function addFileToCollection(collection, file) {
-      collection.push(file);
-    }
 
     done();
-  });
+  }); // end of task
+
+  // utility functions
+
+  // readOptionalJSON by Ben Alman https://gist.github.com/2876125
+  var readOptionalJSON = function(filepath) {
+    var data = {};
+    try {
+      data = grunt.file.readJSON(filepath);
+      grunt.verbose.write("Reading " + filepath + "...").ok();
+    } catch (e) {}
+    return data;
+  };
+
+
+  var addFileToCollection = function(collection, file) {
+    collection.push(file);
+  };
+
+
+  var sortObject = function(o) {
+    var sorted = {},
+    key, a = [];
+    for (key in o) {
+      if (o.hasOwnProperty(key)) {
+        a.push(key);
+      }
+    }
+    a.sort();
+    for (key = 0; key < a.length; key++) {
+      sorted[a[key]] = o[a[key]];
+    }
+    return sorted;
+  };
+
+  // function pulled from assemble
+  // https://github.com/assemble/assemble
+  var mergeOptionsArrays = function(target, name) {
+    var globalArray = grunt.config(['manifest', 'options', name]) || [];
+    var targetArray = grunt.config(['manifest', target, 'options', name]) || [];
+    return _.union(globalArray, targetArray);
+  };
+
 };
 
