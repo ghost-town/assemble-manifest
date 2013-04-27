@@ -151,33 +151,20 @@ module.exports = function(grunt) {
       options.fonts       = _.union(collections.fonts, originalCollections.fonts);
       options.files       = _.union(collections.files, originalCollections.files);
 
-      // Credit: https://github.com/mirkokiefer/canonical-json
-      var copyObjectWithSortedKeys = function(object) {
-        if (isObject(object)) {
-          var newObj = {};
-          var keysSorted = Object.keys(object).sort();
-          var key;
-          for (var i in keysSorted) {
-            key = keysSorted[i];
-            if (Object.prototype.hasOwnProperty.call(object, key)) {
-              newObj[key] = copyObjectWithSortedKeys(object[key]);
-            }
+      function sortObject(o) {
+        var sorted = {},
+        key, a = [];
+        for (key in o) {
+          if (o.hasOwnProperty(key)) {
+            a.push(key);
           }
-          return newObj;
-        } else if (isArray(object)) {
-          return object.map(copyObjectWithSortedKeys);
-        } else {
-          return object;
         }
-      };
-      var isObject = function(a) {
-        return Object.prototype.toString.call(a) === '[object Object]';
-      };
-      var isArray = function(a) {
-        return Object.prototype.toString.call(a) === '[object Array]';
-      };
-
-
+        a.sort();
+        for (key = 0; key < a.length; key++) {
+          sorted[a[key]] = o[a[key]];
+        }
+        return sorted;
+      }
 
       var defaultOmissions = _.defaults(['indent', 'sorted', 'debug', 'omit', 'output']);
       var filteredOptions = _.omit(options, options.omit, defaultOmissions);
@@ -190,7 +177,7 @@ module.exports = function(grunt) {
 
       // Sort JSON alphabetically
       if (options.sorted === true) {
-        optionalOptions = copyObjectWithSortedKeys(optionalOptions);
+        optionalOptions = sortObject(optionalOptions);
       } else {
         optionalOptions = optionalOptions;
       }
