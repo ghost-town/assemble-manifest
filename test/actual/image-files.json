@@ -1,8 +1,11 @@
 {
-  "name": "Images Manifest",
+  "name": "assemble-manifest",
   "description": "Generates JSON and/or YAML manifest files from given source files or directories or source files.",
-  "version": "1.7.5",
-  "repository": "assemble/assemble",
+  "version": "0.1.1",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/assemble/assemble-manifest.git"
+  },
   "devDependencies": {
     "grunt": "~0.4.1",
     "grunt-contrib-clean": "~0.4.1",
@@ -39,12 +42,20 @@
   "engines": {
     "node": ">= 0.8.0"
   },
+  "manifestrc": ".manifestrc",
+  "bugs": {
+    "url": "https://github.com/assemble/assemble-manifest/issues"
+  },
   "main": [
     "test/fixtures/apple-touch-icon-114-precomposed.png",
     "test/fixtures/apple-touch-icon-144-precomposed.png",
     "test/fixtures/apple-touch-icon-57-precomposed.png",
-    "test/fixtures/apple-touch-icon-72-precomposed.png"
+    "test/fixtures/apple-touch-icon-72-precomposed.png",
+    "Gruntfile.js"
   ],
+  "scripts": {
+    "test": "grunt test"
+  },
   "styles": [],
   "javascripts": [],
   "templates": [],

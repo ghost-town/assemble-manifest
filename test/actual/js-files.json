@@ -1,8 +1,11 @@
 {
-  "name": "Theme Manifest",
+  "name": "assemble-manifest",
   "description": "Generates JSON and/or YAML manifest files from given source files or directories or source files.",
-  "version": "1.7.5",
-  "repository": "assemble/assemble",
+  "version": "0.1.1",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/assemble/assemble-manifest.git"
+  },
   "peerDependencies": {
     "grunt": "~0.4.1"
   },
@@ -29,9 +32,17 @@
   "engines": {
     "node": ">= 0.8.0"
   },
+  "manifestrc": ".manifestrc",
+  "bugs": {
+    "url": "https://github.com/assemble/assemble-manifest/issues"
+  },
   "main": [
-    "test/fixtures/test.js"
+    "test/fixtures/test.js",
+    "Gruntfile.js"
   ],
+  "scripts": {
+    "test": "grunt test"
+  },
   "styles": [],
   "javascripts": [
     "test/fixtures/test.js"

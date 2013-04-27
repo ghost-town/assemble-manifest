@@ -27,36 +27,29 @@ module.exports = function(grunt) {
     // Configuration to be run (and then tested).
     manifest: {
       options: {
-        version: '1.7.5',
-        dependencies: {
-          'amdefine': '0.0.4',
-          'chai': '~1.5.0',
-          'grunt': '~0.4.0',
-          'grunt-contrib-jshint': '~0.1.0',
-          'grunt-contrib-watch': '~0.2.0',
-          'grunt-mocha-test': '~0.2.0',
-          'grunt-release': '~0.2.0',
-          'handlebars': '~1.0.9',
-          'testem': '~0.2.68'
-        },
-        omit: ['devDependencies', 'dependencies'],
+        manifestrc: '.manifestrc', // Optional external options and metadata.
         indent: 2,
         debug: false,
         sorted: false,
-        output: 'json'
+        output: 'json',
+        exclude: [
+          'devDependencies',
+          'dependencies'
+        ]
       },
+      // Generate a component.json file.
       component: {
         options: { 
-          omit: ['styles', 'scripts', 'fonts', 'files'],
           name: 'Component Manifest' 
         },
+        // dest: 'test/actual/component.json'
         files: {
-          'test/actual/component.json': ['tasks/*.*']
+          'test/actual/component.json': ['none/*.none']
         }
       },
       images: {
         options: {
-          omit: ['images', 'dependencies'],
+          exclude: ['images', 'dependencies'],
           name: 'Images Manifest'
         },
         files: {
@@ -80,12 +73,37 @@ module.exports = function(grunt) {
           'test/actual/any-files2.yml': ['test/**/*.*']
         }
       },
-      main: {
+      bootstrap: {
         options: {
-          name: 'Main Files'
+          name: 'Bootstrap Manifest'
         },
         files: {
-          'test/actual/files5.json': ['test/main/*.*']
+          'test/actual/bootstrap.json': [
+            'test/bootstrap/less/*.less',
+            'test/bootstrap/docs/assets/**/*.*'
+          ]
+        }
+      },
+      bootstrap_yaml: {
+        options: {
+          name: 'Bootstrap Manifest',
+          output: 'yaml'
+        },
+        files: {
+          'test/actual/bootstrap.yml': [
+            'test/bootstrap/less/*.less',
+            'test/bootstrap/docs/assets/**/*.js',
+            'test/bootstrap/docs/assets/fonts/*.*'
+          ]
+        }
+      },
+      lib: {
+        options: {
+          name: 'Bootstrap LESS',
+          exclude: 'main'
+        },
+        files: {
+          'test/actual/less.json': ['test/bootstrap/**/*.{less,js}']
         }
       },
       theme: {

@@ -1,9 +1,7 @@
-v1.0.0:
-  eta: "Stardate 45047.2"
+Future:
+  eta: N/A
   goals:
-    - Visit the uninhabited El-Adrel system. 
-    - Overcome social anxiety.
-v0.3.0:
-  eta: "2013-05-01"
-  goals:
-    - Use section helpers.
+    - cwd option for building collections
+    - Specify source for metadata in each target
+    - Include and exclude patterns for metadata
+    - Option to not use files.

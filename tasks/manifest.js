@@ -32,38 +32,46 @@ module.exports = function(grunt) {
     var pkg = readOptionalJSON('package.json');
 
     // Merge task-specific and/or target-specific options with these defaults.
+    // this is a temporary quick-fix.
     var options = this.options({
-      name: pkg.name,
-      description: pkg.description,
-      version: pkg.version,
-      repository: 'assemble/assemble',
-      dependencies: pkg.dependencies,
-      devDependencies: pkg.devDependencies,
-      peerDependencies: pkg.peerDependencies,
+      name                : pkg.name,
+      description         : pkg.description,
+      version             : pkg.version,
+      repository          : pkg.repository,
+      dependencies        : pkg.dependencies,
+      devDependencies     : pkg.devDependencies,
+      peerDependencies    : pkg.peerDependencies,
       optionalDependencies: pkg.optionalDependencies,
-      author: pkg.author,
-      contributors: pkg.contributors,
-      keywords: pkg.keywords,
-      homepage: pkg.homepage,
-      licenses: pkg.licenses,
-      engines: pkg.engines,
+      author              : pkg.author,
+      contributors        : pkg.contributors,
+      keywords            : pkg.keywords,
+      homepage            : pkg.homepage,
+      licenses            : pkg.licenses,
+      engines             : pkg.engines,
 
       // Task config options
       debug: false,
       indent: 2,
       sorted: false,
-      omit: [],
+      exclude: [],
       output: 'json',
     });
 
+    // Extend default options with options from specified manifestrc file
+    if (options.manifestrc) {
+      options = grunt.util._.extend(options, grunt.file.readJSON(options.manifestrc));
+    }
+
     var originalCollections = {
-      main: _.union(options.main || [], []),
-      styles: _.union(options.styles || [], []),
+      main       : _.union(options.main || [], []),
+      documents  : _.union(options.documents || [], []),
+      markdown   : _.union(options.markdown || [], []),
+      styles     : _.union(options.styles || [], []),
       javascripts: _.union(options.javascripts || [], []),
-      templates: _.union(options.templates || [], []),
-      images: _.union(options.images || [], []),
-      fonts: _.union(options.fonts || [], []),
-      files: _.union(options.files || [], [])
+      templates  : _.union(options.templates || [], []),
+      images     : _.union(options.images || [], []),
+      fonts      : _.union(options.fonts || [], []),
+      files      : _.union(options.files || [], [])
     };
 
     var done = this.async();
@@ -93,12 +101,10 @@ module.exports = function(grunt) {
         switch (ext) {
           case ".md":
           case ".txt":
-          case ".html":
-          case ".htm":
           case ".doc":
           case ".docx":
           case ".pdf":
-            grunt.verbose.writeln('Adding to documents'.gray);
+            grunt.verbose.writeln('Adding to documents collection'.gray);
             addFileToCollection(collections.documents, src);
             break;
           case ".eot":
@@ -106,35 +112,43 @@ module.exports = function(grunt) {
           case ".otf":
           case ".ttf":
           case ".woff":
-            grunt.verbose.writeln('Adding to fonts'.gray);
+            grunt.verbose.writeln('Adding to fonts collection'.gray);
             addFileToCollection(collections.fonts, src);
             break;
           case ".ico":
           case ".png":
           case ".gif":
           case ".jpg":
-            grunt.verbose.writeln('Adding to images'.green);
+            grunt.verbose.writeln('Adding to images collection'.green);
             addFileToCollection(collections.images, src);
             break;
           case ".js":
           case ".coffee": 
-            grunt.verbose.writeln('Adding to javascripts'.yellow);
+            grunt.verbose.writeln('Adding to javascripts collection'.yellow);
             addFileToCollection(collections.javascripts, src);
+            break;
+          case ".md":
+          case ".markd": 
+          case ".markdown": 
+            grunt.verbose.writeln('Adding to markdown collection'.yellow);
+            addFileToCollection(collections.markdown, src);
             break;
           case ".css":
           case ".less":
           case ".stylus":
           case ".sass":
           case ".scss":
-            grunt.verbose.writeln('Adding to styles'.magenta);
+            grunt.verbose.writeln('Adding to styles collection'.magenta);
             addFileToCollection(collections.styles, src);
             break;
           case ".hbs":
           case ".hbr":
           case ".handlebars":
+          case ".html":
+          case ".htm":
           case ".mustache":
           case ".tmpl":
-            grunt.verbose.writeln('Adding to templates'.gray);
+            grunt.verbose.writeln('Adding to templates collection'.gray);
             addFileToCollection(collections.templates, src);
             break;
           default:
@@ -166,8 +180,17 @@ module.exports = function(grunt) {
         return sorted;
       }
 
-      var defaultOmissions = _.defaults(['indent', 'sorted', 'debug', 'omit', 'output']);
-      var filteredOptions = _.omit(options, options.omit, defaultOmissions);
+      // Properties that are excluded from output by default,
+      // unless debug is set to "true"
+      var defaultOmissions = _.defaults([
+        'debug',
+        'exclude',
+        'indent',
+        'metadata',
+        'output',
+        'sorted'
+      ]);
+      var filteredOptions = _.omit(options, options.exclude, defaultOmissions);
       var optionalOptions;
       if (options.debug === true) {
         optionalOptions = options;

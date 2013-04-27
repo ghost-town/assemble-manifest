@@ -1,7 +1,7 @@
 ---
-  name: "Bootstrap Manifest"
+  name: "assemble-manifest"
   description: "Generates JSON and/or YAML manifest files from given source files or directories or source files."
-  version: "1.7.5"
+  version: "0.1.1"
   repository: 
     type: "git"
     url: "git://github.com/assemble/assemble-manifest.git"
@@ -25,6 +25,9 @@
       url: "https://github.com/assemble/assemble-manifest/blob/master/LICENSE-MIT"
   engines: 
     node: ">= 0.8.0"
+  manifestrc: ".manifestrc"
+  bugs: 
+    url: "https://github.com/assemble/assemble-manifest/issues"
   main: 
     - "test/bootstrap/less/accordion.less"
     - "test/bootstrap/less/alerts.less"
@@ -90,6 +93,9 @@
     - "test/bootstrap/docs/assets/fonts/glyphiconshalflings-regular.svg"
     - "test/bootstrap/docs/assets/fonts/glyphiconshalflings-regular.ttf"
     - "test/bootstrap/docs/assets/fonts/glyphiconshalflings-regular.woff"
+    - "Gruntfile.js"
+  scripts: 
+    test: "grunt test"
   styles: 
     - "test/bootstrap/less/accordion.less"
     - "test/bootstrap/less/alerts.less"

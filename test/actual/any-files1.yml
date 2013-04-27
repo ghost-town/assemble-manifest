@@ -1,8 +1,10 @@
 ---
-  name: "YAML Manifest"
+  name: "assemble-manifest"
   description: "Generates JSON and/or YAML manifest files from given source files or directories or source files."
-  version: "1.7.5"
-  repository: "assemble/assemble"
+  version: "0.1.1"
+  repository: 
+    type: "git"
+    url: "git://github.com/assemble/assemble-manifest.git"
   peerDependencies: 
     grunt: "~0.4.1"
   author: 
@@ -23,12 +25,13 @@
       url: "https://github.com/assemble/assemble-manifest/blob/master/LICENSE-MIT"
   engines: 
     node: ">= 0.8.0"
+  manifestrc: ".manifestrc"
   styles: 
     - "test/fixtures/test.css"
     - "test/fixtures/test.less"
     - "upstage.css"
   scripts: 
-    - "scripts.js"
+    test: "grunt test"
   images: 
     - "test/fixtures/apple-touch-icon-114-precomposed.png"
     - "test/fixtures/apple-touch-icon-144-precomposed.png"
@@ -40,6 +43,8 @@
     - "font.woff"
   files: 
     - "presentation.pdf"
+  bugs: 
+    url: "https://github.com/assemble/assemble-manifest/issues"
   main: 
     - "test/fixtures/apple-touch-icon-114-precomposed.png"
     - "test/fixtures/apple-touch-icon-144-precomposed.png"
@@ -50,6 +55,8 @@
     - "test/fixtures/test.html"
     - "test/fixtures/test.js"
     - "test/fixtures/test.less"
+    - "Gruntfile.js"
   javascripts: 
     - "test/fixtures/test.js"
   templates: 
+    - "test/fixtures/test.html"

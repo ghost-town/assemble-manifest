@@ -1,7 +1,7 @@
 {
-  "name": "Bootstrap LESS",
+  "name": "assemble-manifest",
   "description": "Generates JSON and/or YAML manifest files from given source files or directories or source files.",
-  "version": "1.7.5",
+  "version": "0.1.1",
   "repository": {
     "type": "git",
     "url": "git://github.com/assemble/assemble-manifest.git"
@@ -52,6 +52,13 @@
   ],
   "engines": {
     "node": ">= 0.8.0"
+  },
+  "manifestrc": ".manifestrc",
+  "bugs": {
+    "url": "https://github.com/assemble/assemble-manifest/issues"
+  },
+  "scripts": {
+    "test": "grunt test"
   },
   "styles": [
     "test/bootstrap/less/accordion.less",

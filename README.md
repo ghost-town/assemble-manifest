@@ -1,8 +1,8 @@
-# assemble-manifest
+# [assemble-manifest v0.1.1](http://github.com/assemble/assemble-manifest) [![Build Status](https://travis-ci.org/assemble/assemble-manifest.png)](https://travis-ci.org/assemble/assemble-manifest)
 
 > Generates JSON and/or YAML manifest files from given source files or directories or source files.
 
-See some of the "[test manifests](https://github.com/assemble/assemble-manifest/tree/master/test/actual)" generated with this task.
+See some of the [example manifests](https://github.com/assemble/assemble-manifest/tree/master/test/actual) generated with this task.
 
 
 Use this task to generate:
@@ -13,7 +13,7 @@ Use this task to generate:
 * component.json
 * JSON or YAML formatted list of all files in given directories, sorted by type.
 
-Or just use it to keep the metadata in your root `.json` files synchronized: `package.json`, `component.json`, `*.jquery.json` etc.
+Or just use it to sync the metadata in your root `.json` files: `package.json`, `component.json`, `*.jquery.json` etc.
 
 
 ## Getting Started
@@ -44,21 +44,47 @@ grunt.initConfig({
     },
     your_target: {
       // Target-specific file lists and/or options go here.
-    },
-  },
+    }
+  }
 })
 ```
-### Example manifest
 
 
 ### Options
 _Documentation forthcoming_
 
-* sorted
-* indent
-* debug
+#### sorted
+Type: `Boolean`
+Default: `false`
 
-* "collections"
+Sorts ouput objects and properties in alphabetical order.
+
+
+#### indent
+Type: `Number`
+Default: `2`
+
+Number of spaces to indent the output. Currently only works for `.json` files, not `.yml`.
+
+
+#### debug
+Type: `Boolean`
+Default: `false`
+
+When set to `true`, the output will include all omitted properties for inspection.
+
+
+## collections
+
+
+
+### Example manifest
+Any `package.json` or `component.json` is an example of what this task can create. Here is an example in `yaml` format.
+
+``` yaml
+
+
+
 
 
 ### Usage Examples
