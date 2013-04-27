@@ -27,7 +27,6 @@ module.exports = function(grunt) {
     // Configuration to be run (and then tested).
     manifest: {
       options: {
-        debug: true,
         version: '1.7.5',
         dependencies: {
           'amdefine': '0.0.4',
@@ -42,6 +41,7 @@ module.exports = function(grunt) {
         },
         omit: ['devDependencies', 'dependencies'],
         indent: 2,
+        debug: false,
         sorted: false,
         output: 'json'
       },

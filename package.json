@@ -34,7 +34,8 @@
     "grunt-contrib-nodeunit": "~0.1.2",
     "json2yaml": "~1.0.1",
     "js-yaml": "~2.0.4",
-    "lodash": "~1.1.1"
+    "lodash": "~1.1.1",
+    "mout": "~0.5.0"
   },
   "peerDependencies": {
     "grunt": "~0.4.1"

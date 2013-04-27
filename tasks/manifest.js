@@ -36,11 +36,17 @@ module.exports = function(grunt) {
       name: pkg.name,
       description: pkg.description,
       version: pkg.version,
-      repo: 'assemble/assemble',
+      repository: 'assemble/assemble',
       dependencies: pkg.dependencies,
       devDependencies: pkg.devDependencies,
       peerDependencies: pkg.peerDependencies,
       optionalDependencies: pkg.optionalDependencies,
+      author: pkg.author,
+      contributors: pkg.contributors,
+      keywords: pkg.keywords,
+      homepage: pkg.homepage,
+      licenses: pkg.licenses,
+      engines: pkg.engines,
 
       // Task config options
       debug: false,
@@ -53,7 +59,7 @@ module.exports = function(grunt) {
     var originalCollections = {
       main: _.union(options.main || [], []),
       styles: _.union(options.styles || [], []),
-      scripts: _.union(options.scripts || [], []),
+      javascripts: _.union(options.javascripts || [], []),
       templates: _.union(options.templates || [], []),
       images: _.union(options.images || [], []),
       fonts: _.union(options.fonts || [], []),
@@ -72,7 +78,7 @@ module.exports = function(grunt) {
         documents: [],
         fonts: [],
         images: [],
-        scripts: [],
+        javascripts: [],
         styles: [],
         templates: [],
         files: []
@@ -97,6 +103,7 @@ module.exports = function(grunt) {
             break;
           case ".eot":
           case ".svg":
+          case ".otf":
           case ".ttf":
           case ".woff":
             grunt.verbose.writeln('Adding to fonts'.gray);
@@ -111,8 +118,8 @@ module.exports = function(grunt) {
             break;
           case ".js":
           case ".coffee": 
-            grunt.verbose.writeln('Adding to scripts'.yellow);
-            addFileToCollection(collections.scripts, src);
+            grunt.verbose.writeln('Adding to javascripts'.yellow);
+            addFileToCollection(collections.javascripts, src);
             break;
           case ".css":
           case ".less":
@@ -136,13 +143,13 @@ module.exports = function(grunt) {
         addFileToCollection(collections.main, src);
       });
 
-      options.main      = _.union(collections.main, originalCollections.main);
-      options.styles    = _.union(collections.styles, originalCollections.styles);
-      options.scripts   = _.union(collections.scripts, originalCollections.scripts);
-      options.templates = _.union(collections.templates, originalCollections.templates);
-      options.images    = _.union(collections.images, originalCollections.images);
-      options.fonts     = _.union(collections.fonts, originalCollections.fonts);
-      options.files     = _.union(collections.files, originalCollections.files);
+      options.main        = _.union(collections.main, originalCollections.main);
+      options.styles      = _.union(collections.styles, originalCollections.styles);
+      options.javascripts = _.union(collections.javascripts, originalCollections.javascripts);
+      options.templates   = _.union(collections.templates, originalCollections.templates);
+      options.images      = _.union(collections.images, originalCollections.images);
+      options.fonts       = _.union(collections.fonts, originalCollections.fonts);
+      options.files       = _.union(collections.files, originalCollections.files);
 
       // Credit: https://github.com/mirkokiefer/canonical-json
       var copyObjectWithSortedKeys = function(object) {
@@ -169,6 +176,8 @@ module.exports = function(grunt) {
       var isArray = function(a) {
         return Object.prototype.toString.call(a) === '[object Array]';
       };
+
+
 
       var defaultOmissions = _.defaults(['indent', 'sorted', 'debug', 'omit', 'output']);
       var filteredOptions = _.omit(options, options.omit, defaultOmissions);

@@ -2,7 +2,7 @@
   "name": "Component Manifest",
   "description": "Generates JSON and/or YAML manifest files from given source files or directories or source files.",
   "version": "1.7.5",
-  "repo": "assemble/assemble",
+  "repository": "assemble/assemble",
   "dependencies": {
     "amdefine": "0.0.4",
     "chai": "~1.5.0",
@@ -21,30 +21,41 @@
     "grunt-contrib-nodeunit": "~0.1.2",
     "json2yaml": "~1.0.1",
     "js-yaml": "~2.0.4",
-    "lodash": "~1.1.1"
+    "lodash": "~1.1.1",
+    "mout": "~0.5.0"
   },
   "peerDependencies": {
     "grunt": "~0.4.1"
   },
-  "debug": true,
-  "indent": 2,
-  "sorted": false,
-  "omit": [
-    "styles",
-    "scripts",
-    "fonts",
-    "files"
+  "author": {
+    "name": "Jon Schlinkert",
+    "url": "http://github.com/jonschlinkert/"
+  },
+  "keywords": [
+    "gruntplugin",
+    "package",
+    "package manifest",
+    "directories files",
+    "json",
+    "yaml",
+    "manifest"
   ],
-  "output": "json",
+  "homepage": "https://github.com/assemble/assemble-manifest",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/assemble/assemble-manifest/blob/master/LICENSE-MIT"
+    }
+  ],
+  "engines": {
+    "node": ">= 0.8.0"
+  },
   "main": [
     "tasks/manifest.js"
   ],
-  "styles": [],
-  "scripts": [
+  "javascripts": [
     "tasks/manifest.js"
   ],
   "templates": [],
-  "images": [],
-  "fonts": [],
-  "files": []
+  "images": []
 }

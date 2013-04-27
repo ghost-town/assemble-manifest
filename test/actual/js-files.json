@@ -2,43 +2,38 @@
   "name": "Theme Manifest",
   "description": "Generates JSON and/or YAML manifest files from given source files or directories or source files.",
   "version": "1.7.5",
-  "repo": "assemble/assemble",
-  "dependencies": {
-    "amdefine": "0.0.4",
-    "chai": "~1.5.0",
-    "grunt": "~0.4.0",
-    "grunt-contrib-jshint": "~0.1.0",
-    "grunt-contrib-watch": "~0.2.0",
-    "grunt-mocha-test": "~0.2.0",
-    "grunt-release": "~0.2.0",
-    "handlebars": "~1.0.9",
-    "testem": "~0.2.68"
-  },
-  "devDependencies": {
-    "grunt": "~0.4.1",
-    "grunt-contrib-clean": "~0.4.1",
-    "grunt-contrib-jshint": "~0.4.3",
-    "grunt-contrib-nodeunit": "~0.1.2",
-    "json2yaml": "~1.0.1",
-    "js-yaml": "~2.0.4",
-    "lodash": "~1.1.1"
-  },
+  "repository": "assemble/assemble",
   "peerDependencies": {
     "grunt": "~0.4.1"
   },
-  "debug": true,
-  "indent": 2,
-  "sorted": false,
-  "omit": [
-    "devDependencies",
-    "dependencies"
+  "author": {
+    "name": "Jon Schlinkert",
+    "url": "http://github.com/jonschlinkert/"
+  },
+  "keywords": [
+    "gruntplugin",
+    "package",
+    "package manifest",
+    "directories files",
+    "json",
+    "yaml",
+    "manifest"
   ],
-  "output": "json",
+  "homepage": "https://github.com/assemble/assemble-manifest",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/assemble/assemble-manifest/blob/master/LICENSE-MIT"
+    }
+  ],
+  "engines": {
+    "node": ">= 0.8.0"
+  },
   "main": [
     "test/fixtures/test.js"
   ],
   "styles": [],
-  "scripts": [
+  "javascripts": [
     "test/fixtures/test.js"
   ],
   "templates": [],
