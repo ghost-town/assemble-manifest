@@ -1,8 +1,8 @@
 /*
  * assemble-manifest
- * https://github.com/jps/New folder
+ * https://github.com/assemble/assemble-manifest
  *
- * Copyright (c) 2013 Jon Schlinkert
+ * Copyright (c) 2013 Jon Schlinkert, Brian Woodward, contributors.
  * Licensed under the MIT license.
  */
 
@@ -29,9 +29,8 @@ module.exports = function(grunt) {
       options: {
         manifestrc: '.manifestrc', // Optional external options and metadata.
         indent: 2,
-        debug: false,
-        sorted: false,
-        output: 'json',
+        debug: true,
+        sorted: true,
         exclude: [
           'devDependencies',
           'dependencies'
@@ -49,17 +48,25 @@ module.exports = function(grunt) {
       },
       images: {
         options: {
+          name: 'Images Manifest'
+        },
+        files: {
+          'test/actual/images.json': ['test/fixtures/**/*.{jpg,png,gif}'],
+        }
+      },
+      images_main_only: {
+        options: {
           exclude: ['images', 'dependencies'],
           name: 'Images Manifest'
         },
         files: {
-          'test/actual/image-files.json': ['test/fixtures/*.{jpg,png,gif}'],
+          'test/actual/images-main.json': ['test/fixtures/**/*.{jpg,png,gif}'],
         }
       },
       yaml: {
         options: {
           name: 'YAML Manifest',
-          output: 'yml',
+          format: 'yml',
           styles: [
             "upstage.css"
           ],
@@ -87,13 +94,25 @@ module.exports = function(grunt) {
       bootstrap_yaml: {
         options: {
           name: 'Bootstrap Manifest',
-          output: 'yaml'
+          format: 'yaml'
         },
         files: {
           'test/actual/bootstrap.yml': [
             'test/bootstrap/less/*.less',
             'test/bootstrap/docs/assets/**/*.js',
             'test/bootstrap/docs/assets/fonts/*.*'
+          ]
+        }
+      },
+      bootstrap_sorted: {
+        options: {
+          sorted: true,
+          name: 'Bootstrap Manifest'
+        },
+        files: {
+          'test/actual/bootstrap_sorted.json': [
+            'test/bootstrap/less/*.less',
+            'test/bootstrap/docs/assets/**/*.*'
           ]
         }
       },

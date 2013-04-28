@@ -1,62 +1,86 @@
----
-  name: "assemble-manifest"
-  description: "Generates JSON and/or YAML manifest files from given source files or directories or source files."
-  version: "0.1.1"
-  repository: 
-    type: "git"
-    url: "git://github.com/assemble/assemble-manifest.git"
-  peerDependencies: 
-    grunt: "~0.4.1"
-  author: 
-    name: "Jon Schlinkert"
-    url: "http://github.com/jonschlinkert/"
-  keywords: 
-    - "gruntplugin"
-    - "package"
-    - "package manifest"
-    - "directories files"
-    - "json"
-    - "yaml"
-    - "manifest"
-  homepage: "https://github.com/assemble/assemble-manifest"
-  licenses: 
-    - 
-      type: "MIT"
-      url: "https://github.com/assemble/assemble-manifest/blob/master/LICENSE-MIT"
-  engines: 
-    node: ">= 0.8.0"
-  manifestrc: ".manifestrc"
-  styles: 
-    - "test/fixtures/test.css"
-    - "test/fixtures/test.less"
-    - "upstage.css"
-  scripts: 
-    test: "grunt test"
-  images: 
-    - "test/fixtures/apple-touch-icon-114-precomposed.png"
-    - "test/fixtures/apple-touch-icon-144-precomposed.png"
-    - "test/fixtures/apple-touch-icon-57-precomposed.png"
-    - "test/fixtures/apple-touch-icon-72-precomposed.png"
-    - "styles.css"
-  fonts: 
-    - "test/fixtures/arial.woff"
-    - "font.woff"
-  files: 
-    - "presentation.pdf"
-  bugs: 
-    url: "https://github.com/assemble/assemble-manifest/issues"
-  main: 
-    - "test/fixtures/apple-touch-icon-114-precomposed.png"
-    - "test/fixtures/apple-touch-icon-144-precomposed.png"
-    - "test/fixtures/apple-touch-icon-57-precomposed.png"
-    - "test/fixtures/apple-touch-icon-72-precomposed.png"
-    - "test/fixtures/arial.woff"
-    - "test/fixtures/test.css"
-    - "test/fixtures/test.html"
-    - "test/fixtures/test.js"
-    - "test/fixtures/test.less"
-    - "Gruntfile.js"
-  javascripts: 
-    - "test/fixtures/test.js"
-  templates: 
-    - "test/fixtures/test.html"
+name: "assemble-manifest"
+description: "Generates JSON and/or YAML manifest files from given source files or directories or source files."
+version: "0.1.1"
+repository: 
+  type: git
+  url: "git://github.com/assemble/assemble-manifest.git"
+dependencies: 
+  amdefine: "0.0.4"
+  chai: "~1.5.0"
+  grunt: "~0.4.0"
+  "grunt-contrib-jshint": "~0.1.0"
+  "grunt-contrib-watch": "~0.2.0"
+  "grunt-mocha-test": "~0.2.0"
+  "grunt-release": "~0.2.0"
+  handlebars: "~1.0.9"
+  testem: "~0.2.68"
+devDependencies: 
+  grunt: "~0.4.1"
+  "grunt-contrib-clean": "~0.4.1"
+  "grunt-contrib-jshint": "~0.4.3"
+  "grunt-contrib-nodeunit": "~0.1.2"
+  json2yaml: "~1.0.1"
+  "js-yaml": "~2.0.4"
+  lodash: "~1.1.1"
+  mout: "~0.5.0"
+peerDependencies: 
+  grunt: "~0.4.1"
+optionalDependencies: null
+author: 
+  name: "Jon Schlinkert"
+  url: "http://github.com/jonschlinkert/"
+contributors: 
+  - name: "Brian Woodward"
+    email: "brian.woodward@assemble.com"
+    url: "https://github.com/doowb"
+  - name: "Jon Schlinkert"
+    email: "jon.schlinkert@assemble.com"
+    url: "https://github.com/jonschlinkert"
+keywords: 
+  - gruntplugin
+  - package
+  - "package manifest"
+  - "directories files"
+  - json
+  - yaml
+  - manifest
+homepage: "https://github.com/assemble/assemble-manifest"
+licenses: 
+  - type: MIT
+    url: "https://github.com/assemble/assemble-manifest/blob/master/LICENSE-MIT"
+engines: 
+  node: ">= 0.8.0"
+indent: 2
+format: yml
+sorted: true
+debug: true
+manifestrc: ".manifestrc"
+exclude: 
+  - devDependencies
+  - dependencies
+styles: 
+  - "test/fixtures/test.css"
+  - "test/fixtures/test.less"
+  - "upstage.css"
+scripts: 
+  test: "grunt test"
+images: 
+  - "styles.css"
+fonts: 
+  - "test/fixtures/arial.woff"
+  - "font.woff"
+files: 
+  - "presentation.pdf"
+bugs: 
+  url: "https://github.com/assemble/assemble-manifest/issues"
+main: 
+  - "test/fixtures/arial.woff"
+  - "test/fixtures/test.css"
+  - "test/fixtures/test.html"
+  - "test/fixtures/test.js"
+  - "test/fixtures/test.less"
+  - "Gruntfile.js"
+javascripts: 
+  - "test/fixtures/test.js"
+templates: 
+  - "test/fixtures/test.html"

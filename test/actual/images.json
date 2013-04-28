@@ -78,18 +78,40 @@
     "url": "https://github.com/assemble/assemble-manifest/issues"
   },
   "main": [
-    "test/fixtures/test.css",
+    "test/fixtures/images/docs/apple-touch-icon-114-precomposed.png",
+    "test/fixtures/images/docs/apple-touch-icon-144-precomposed.png",
+    "test/fixtures/images/docs/apple-touch-icon-57-precomposed.png",
+    "test/fixtures/images/docs/apple-touch-icon-72-precomposed.png",
+    "test/fixtures/images/docs/favicon.png",
+    "test/fixtures/images/favicon.png",
+    "test/fixtures/images/icons/apple-touch-icon-114-precomposed.png",
+    "test/fixtures/images/icons/apple-touch-icon-144-precomposed.png",
+    "test/fixtures/images/icons/apple-touch-icon-57-precomposed.png",
+    "test/fixtures/images/icons/apple-touch-icon-72-precomposed.png",
+    "test/fixtures/images/loaders/16x16.gif",
+    "test/fixtures/images/twitter.png",
     "Gruntfile.js"
   ],
   "scripts": {
     "test": "grunt test"
   },
-  "styles": [
-    "test/fixtures/test.css"
-  ],
+  "styles": [],
   "javascripts": [],
   "templates": [],
-  "images": [],
+  "images": [
+    "test/fixtures/images/docs/apple-touch-icon-114-precomposed.png",
+    "test/fixtures/images/docs/apple-touch-icon-144-precomposed.png",
+    "test/fixtures/images/docs/apple-touch-icon-57-precomposed.png",
+    "test/fixtures/images/docs/apple-touch-icon-72-precomposed.png",
+    "test/fixtures/images/docs/favicon.png",
+    "test/fixtures/images/favicon.png",
+    "test/fixtures/images/icons/apple-touch-icon-114-precomposed.png",
+    "test/fixtures/images/icons/apple-touch-icon-144-precomposed.png",
+    "test/fixtures/images/icons/apple-touch-icon-57-precomposed.png",
+    "test/fixtures/images/icons/apple-touch-icon-72-precomposed.png",
+    "test/fixtures/images/loaders/16x16.gif",
+    "test/fixtures/images/twitter.png"
+  ],
   "fonts": [],
   "files": []
 }

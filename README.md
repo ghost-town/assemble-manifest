@@ -53,6 +53,16 @@ grunt.initConfig({
 ### Options
 _Documentation forthcoming_
 
+#### format
+Type: `String`
+Default: `json`
+
+Option to specify output format for dest files. Case insensitive, and may be either YAML or JSON format. Any of the following will work:
+
+* `'yml'`, `'yaml'`, `'YML'`, `'YAML'`
+* `'json'`, `'JSON'` (although these are uncessary since the task defaults to json)
+
+
 #### sorted
 Type: `Boolean`
 Default: `false`
@@ -74,15 +84,83 @@ Default: `false`
 When set to `true`, the output will include all omitted properties for inspection.
 
 
-## collections
+## Collections
+Type: `Arrays|Objects`
+Default: `documents|fonts|images|javascripts|markdown|styles|templates`
+
+> Generate arrays of files with specific extensions from given source directories. 
+
+Currently limited to file types defined in the code. We realize this part of the task is somewhat hard-coded for our own usage, so the plan is to allow collections and extensions to be user-defined, through the task and target options. 
+
+By default, currently the task will build the following types of collections, and with the specified extensions for each collection:
+
+#### documents
+* `.md`
+* `.txt`
+* `.doc`
+* `.docx`
+* `.pdf`
+
+#### fonts
+* `.eot`
+* `.svg`
+* `.otf`
+* `.ttf`
+* `.woff`
+
+#### images
+* `.ico`
+* `.png`
+* `.gif`
+* `.jpg`
+
+#### javascripts
+* `.js`
+* `.coffee`
+
+#### markdown
+* `.md`
+* `.markd`
+* `.markdown`
+
+#### styles
+* `.css`
+* `.less`
+* `.stylus`
+* `.sass`
+* `.scss`
+
+#### templates
+* `.hbs`
+* `.hbr`
+* `.handlebars`
+* `.html`
+* `.htm`
+* `.mustache`
+* `.tmpl`
 
 
+To build a specific collection, just add the extension pattern(s) for the `src` files you want to add to your dest file(s). You don't need to do anything to explicity add the collection itself, the task takes care of that for you. For example:
+
+``` js
+images: {
+  options: {
+    name: 'Image Manifest'
+  },
+  files: {
+    'dest/images.json': ['assets/images/**/*.{jpg,png,gif}'],
+  }
+}
+```
 
 ### Example manifest
 Any `package.json` or `component.json` is an example of what this task can create. Here is an example in `yaml` format.
 
 ``` yaml
-
+name: assemble-manifest
+description: Generates JSON and/or YAML manifest files from given source files or directories or source files.
+... 
+```
 
 
 
@@ -95,8 +173,7 @@ Example target to build a `component.json` from a `package.json`. You may:
  * Override any objects or properties in the options by simply adding the new value to the options. 
  * Remove any objects or properties in the options by making the value `undefined` (this is a quick fix, will revisit but it works for now.)
  * Define new objects and properties in the options block.
- * Output to either YAML or JSON format.
- * Generate arrays of files with specific extensions from given source directories. Currently limited to certain file types, but may be expanded to be more dynamic if there is a use case. 
+ 
 
 ``` js
 manifest: {

@@ -1,7 +1,7 @@
 {
   "name": "assemble-manifest",
   "description": "Generates JSON and/or YAML manifest files from given source files or directories or source files.",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "homepage": "https://github.com/assemble/assemble-manifest",
   "author": {
     "name": "Jon Schlinkert",
@@ -32,13 +32,10 @@
     "grunt-contrib-clean": "~0.4.1",
     "grunt-contrib-jshint": "~0.4.3",
     "grunt-contrib-nodeunit": "~0.1.2",
-    "json2yaml": "~1.0.1",
     "js-yaml": "~2.0.4",
     "lodash": "~1.1.1",
-    "mout": "~0.5.0"
-  },
-  "peerDependencies": {
-    "grunt": "~0.4.1"
+    "mout": "~0.5.0",
+    "to": "~0.2.9"
   },
   "keywords": [
     "gruntplugin",

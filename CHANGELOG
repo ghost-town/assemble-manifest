@@ -1,3 +1,8 @@
+v0.1.2:
+  date: "2013-04-28"
+  changes:
+    - Replaced json2yaml with "to"
+    - Renamed options.output to options.format
 v0.1.1:
   date: "2013-04-26"
   changes:

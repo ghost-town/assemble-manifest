@@ -6,6 +6,27 @@
     "type": "git",
     "url": "git://github.com/assemble/assemble-manifest.git"
   },
+  "dependencies": {
+    "amdefine": "0.0.4",
+    "chai": "~1.5.0",
+    "grunt": "~0.4.0",
+    "grunt-contrib-jshint": "~0.1.0",
+    "grunt-contrib-watch": "~0.2.0",
+    "grunt-mocha-test": "~0.2.0",
+    "grunt-release": "~0.2.0",
+    "handlebars": "~1.0.9",
+    "testem": "~0.2.68"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-clean": "~0.4.1",
+    "grunt-contrib-jshint": "~0.4.3",
+    "grunt-contrib-nodeunit": "~0.1.2",
+    "json2yaml": "~1.0.1",
+    "js-yaml": "~2.0.4",
+    "lodash": "~1.1.1",
+    "mout": "~0.5.0"
+  },
   "peerDependencies": {
     "grunt": "~0.4.1"
   },
@@ -13,6 +34,18 @@
     "name": "Jon Schlinkert",
     "url": "http://github.com/jonschlinkert/"
   },
+  "contributors": [
+    {
+      "name": "Brian Woodward",
+      "email": "brian.woodward@assemble.com",
+      "url": "https://github.com/doowb"
+    },
+    {
+      "name": "Jon Schlinkert",
+      "email": "jon.schlinkert@assemble.com",
+      "url": "https://github.com/jonschlinkert"
+    }
+  ],
   "keywords": [
     "gruntplugin",
     "package",
@@ -32,7 +65,15 @@
   "engines": {
     "node": ">= 0.8.0"
   },
+  "indent": 2,
+  "format": "json",
+  "sorted": true,
+  "debug": true,
   "manifestrc": ".manifestrc",
+  "exclude": [
+    "devDependencies",
+    "dependencies"
+  ],
   "bugs": {
     "url": "https://github.com/assemble/assemble-manifest/issues"
   },
