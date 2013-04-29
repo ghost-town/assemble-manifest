@@ -1,51 +1,40 @@
 {
-  "name": "assemble-manifest",
+  "author": {
+    "name": "Assemble",
+    "url": "http://github.com/assemble/assemble/"
+  },
+  "bugs": {
+    "url": "https://github.com/assemble/assemble-manifest/issues"
+  },
+  "contributors": [
+    {
+      "name": "Brian Woodward",
+      "url": "https://github.com/doowb"
+    },
+    {
+      "name": "Jon Schlinkert",
+      "url": "https://github.com/jonschlinkert"
+    }
+  ],
   "description": "Generates JSON and/or YAML manifest files from given source files or directories or source files.",
-  "version": "0.1.1",
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/assemble/assemble-manifest.git"
-  },
-  "dependencies": {
-    "amdefine": "0.0.4",
-    "chai": "~1.5.0",
-    "grunt": "~0.4.0",
-    "grunt-contrib-jshint": "~0.1.0",
-    "grunt-contrib-watch": "~0.2.0",
-    "grunt-mocha-test": "~0.2.0",
-    "grunt-release": "~0.2.0",
-    "handlebars": "~1.0.9",
-    "testem": "~0.2.68"
-  },
   "devDependencies": {
     "grunt": "~0.4.1",
     "grunt-contrib-clean": "~0.4.1",
     "grunt-contrib-jshint": "~0.4.3",
     "grunt-contrib-nodeunit": "~0.1.2",
-    "json2yaml": "~1.0.1",
     "js-yaml": "~2.0.4",
-    "lodash": "~1.1.1",
-    "mout": "~0.5.0"
+    "lodash": "~1.2.0",
+    "mout": "~0.5.0",
+    "to": "~0.2.9",
+    "graceful-fs": "~1.2.0"
   },
-  "peerDependencies": {
-    "grunt": "~0.4.1"
+  "engines": {
+    "node": ">= 0.8.0"
   },
-  "author": {
-    "name": "Jon Schlinkert",
-    "url": "http://github.com/jonschlinkert/"
-  },
-  "contributors": [
-    {
-      "name": "Brian Woodward",
-      "email": "brian.woodward@assemble.com",
-      "url": "https://github.com/doowb"
-    },
-    {
-      "name": "Jon Schlinkert",
-      "email": "jon.schlinkert@assemble.com",
-      "url": "https://github.com/jonschlinkert"
-    }
-  ],
+  "files": [],
+  "fonts": [],
+  "homepage": "https://github.com/assemble/assemble-manifest",
+  "javascripts": [],
   "keywords": [
     "gruntplugin",
     "package",
@@ -55,29 +44,12 @@
     "yaml",
     "manifest"
   ],
-  "homepage": "https://github.com/assemble/assemble-manifest",
   "licenses": [
     {
       "type": "MIT",
       "url": "https://github.com/assemble/assemble-manifest/blob/master/LICENSE-MIT"
     }
   ],
-  "engines": {
-    "node": ">= 0.8.0"
-  },
-  "indent": 2,
-  "format": "json",
-  "sorted": true,
-  "debug": true,
-  "manifestrc": ".manifestrc",
-  "exclude": [
-    "devDependencies",
-    "dependencies",
-    "images"
-  ],
-  "bugs": {
-    "url": "https://github.com/assemble/assemble-manifest/issues"
-  },
   "main": [
     "test/fixtures/images/docs/apple-touch-icon-114-precomposed.png",
     "test/fixtures/images/docs/apple-touch-icon-144-precomposed.png",
@@ -93,26 +65,16 @@
     "test/fixtures/images/twitter.png",
     "Gruntfile.js"
   ],
+  "manifestrc": ".manifestrc",
+  "name": "assemble-manifest",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/assemble/assemble-manifest.git"
+  },
   "scripts": {
     "test": "grunt test"
   },
   "styles": [],
-  "javascripts": [],
   "templates": [],
-  "images": [
-    "test/fixtures/images/docs/apple-touch-icon-114-precomposed.png",
-    "test/fixtures/images/docs/apple-touch-icon-144-precomposed.png",
-    "test/fixtures/images/docs/apple-touch-icon-57-precomposed.png",
-    "test/fixtures/images/docs/apple-touch-icon-72-precomposed.png",
-    "test/fixtures/images/docs/favicon.png",
-    "test/fixtures/images/favicon.png",
-    "test/fixtures/images/icons/apple-touch-icon-114-precomposed.png",
-    "test/fixtures/images/icons/apple-touch-icon-144-precomposed.png",
-    "test/fixtures/images/icons/apple-touch-icon-57-precomposed.png",
-    "test/fixtures/images/icons/apple-touch-icon-72-precomposed.png",
-    "test/fixtures/images/loaders/16x16.gif",
-    "test/fixtures/images/twitter.png"
-  ],
-  "fonts": [],
-  "files": []
+  "version": "0.1.3"
 }
