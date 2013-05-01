@@ -12,6 +12,7 @@ module.exports = function(grunt) {
 
   // Project configuration.
   grunt.initConfig({
+  pkg: grunt.file.readJSON('package.json'),
 
     jshint: {
       all: [
@@ -25,9 +26,6 @@ module.exports = function(grunt) {
 
     // Configuration to be run (and then tested).
     manifest: {
-      options: {
-        metadata: ['package.json']
-      },
       debug: {
         options: { 
           debug: true,

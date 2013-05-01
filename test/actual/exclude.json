@@ -1,5 +1,4 @@
 {
-  "gitconfig": "",
   "name": "assemble-manifest",
   "description": "Generates JSON and/or YAML manifest files from given source files or directories or source files.",
   "version": "0.1.3",

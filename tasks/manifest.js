@@ -22,7 +22,6 @@ module.exports = function(grunt) {
     
     // Default configuration options.
     var options = this.options({
-      gitconfig: '',
       collections: false,
       manifestrc: [],
       metadata: [],
