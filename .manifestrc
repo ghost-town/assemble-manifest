@@ -1,63 +1,9 @@
 {
-  "name": "assemble-manifest",
-  "description": "Generates JSON and/or YAML manifest files from given source files or directories or source files.",
-  "version": "0.1.1",
-  "homepage": "https://github.com/assemble/assemble-manifest",
-  "author": {
-    "name": "Jon Schlinkert",
-    "url": "http://github.com/jonschlinkert/"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/assemble/assemble-manifest.git"
-  },
-  "bugs": {
-    "url": "https://github.com/assemble/assemble-manifest/issues"
-  },
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "https://github.com/assemble/assemble-manifest/blob/master/LICENSE-MIT"
-    }
-  ],
-  "main": "Gruntfile.js",
-  "engines": {
-    "node": ">= 0.8.0"
-  },
-  "scripts": {
-    "test": "grunt test"
-  },
-  "dependencies": {
-    "amdefine": "0.0.4",
-    "chai": "~1.5.0",
-    "grunt": "~0.4.0",
-    "grunt-contrib-jshint": "~0.1.0",
-    "grunt-contrib-watch": "~0.2.0",
-    "grunt-mocha-test": "~0.2.0",
-    "grunt-release": "~0.2.0",
-    "handlebars": "~1.0.9",
-    "testem": "~0.2.68"
-  },
-  "devDependencies": {
-    "grunt": "~0.4.1",
-    "grunt-contrib-clean": "~0.4.1",
-    "grunt-contrib-jshint": "~0.4.3",
-    "grunt-contrib-nodeunit": "~0.1.2",
-    "json2yaml": "~1.0.1",
-    "js-yaml": "~2.0.4",
-    "lodash": "~1.1.1",
-    "mout": "~0.5.0"
-  },
-  "peerDependencies": {
-    "grunt": "~0.4.1"
-  },
-  "keywords": [
-    "gruntplugin",
-    "package",
-    "package manifest",
-    "directories files",
-    "json",
-    "yaml",
-    "manifest"
+  "indent": 2,
+  "sorted": true,
+  "metadata": [],
+  "exclude": [
+    "firstKey",
+    "secondKey"
   ]
 }
