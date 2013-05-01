@@ -1,5 +1,5 @@
 {
-  "collections": false,
+  "collections": true,
   "manifestrc": [],
   "metadata": [],
   "indent": 2,
@@ -7,6 +7,12 @@
   "format": "json",
   "sorted": false,
   "debug": true,
-  "name": "Debug Example",
-  "description": "Debug shows all omitted objects and properties in the output."
+  "name": "debug-example",
+  "description": "Debug shows all omitted objects and properties in the output.",
+  "main": [],
+  "styles": [],
+  "javascripts": [],
+  "templates": [],
+  "images": [],
+  "fonts": []
 }

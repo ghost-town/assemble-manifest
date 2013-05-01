@@ -2,6 +2,7 @@
   "name": "Collections Example",
   "description": "Generated a manifest from \"collections\" of files",
   "main": [
+    "test/actual/bower.json",
     "test/actual/component.json",
     "test/actual/debug.json",
     "test/actual/exclude.json",

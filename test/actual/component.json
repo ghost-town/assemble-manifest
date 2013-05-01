@@ -1,4 +1,10 @@
 {
-  "name": "Component Manifest",
-  "description": "Generate a component.json file."
+  "name": "component-example",
+  "description": "Generate a component.json file.",
+  "main": [],
+  "styles": [],
+  "javascripts": [],
+  "templates": [],
+  "images": [],
+  "fonts": []
 }

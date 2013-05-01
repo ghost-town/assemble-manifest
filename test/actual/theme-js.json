@@ -1,3 +1,13 @@
 {
-  "name": "Theme Manifest"
+  "name": "Theme Manifest",
+  "main": [
+    "test/fixtures/test.js"
+  ],
+  "styles": [],
+  "javascripts": [
+    "test/fixtures/test.js"
+  ],
+  "templates": [],
+  "images": [],
+  "fonts": []
 }

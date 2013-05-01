@@ -22,7 +22,7 @@ module.exports = function(grunt) {
     
     // Default configuration options.
     var options = this.options({
-      collections: false,
+      collections: true,
       manifestrc: [],
       metadata: [],
       indent: 2,
@@ -43,14 +43,14 @@ module.exports = function(grunt) {
 
     // Default "collections"
     var defaultCollections = {
-      main       : _.union(options.main || [], []),
       documents  : _.union(options.documents || [], []),
+      fonts      : _.union(options.fonts || [], []),
+      images     : _.union(options.images || [], []),
+      javascripts: _.union(options.javascripts || [], []),
+      main       : _.union(options.main || [], []),
       markdown   : _.union(options.markdown || [], []),
       styles     : _.union(options.styles || [], []),
-      javascripts: _.union(options.javascripts || [], []),
-      templates  : _.union(options.templates || [], []),
-      images     : _.union(options.images || [], []),
-      fonts      : _.union(options.fonts || [], [])
+      templates  : _.union(options.templates || [], [])
     };
 
     /* Default objects and properties excluded from output. 
@@ -70,11 +70,11 @@ module.exports = function(grunt) {
     this.files.forEach(function(fp) {
       var dest = fp.dest;
       var collections = {
-        main: [],
         documents: [],
         fonts: [],
         images: [],
         javascripts: [],
+        main: [],
         styles: [],
         templates: []
       };

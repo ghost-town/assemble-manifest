@@ -1,11 +1,28 @@
 files: 
   - "presentation.pdf"
 fonts: 
+  - "test/fixtures/arial.woff"
   - "font.woff"
 images: 
   - "styles.css"
+javascripts: 
+  - "test/fixtures/test.js"
+main: 
+  - "test/fixtures/arial.woff"
+  - "test/fixtures/component.json"
+  - "test/fixtures/jquery.json"
+  - "test/fixtures/one.json"
+  - "test/fixtures/package.json"
+  - "test/fixtures/test.css"
+  - "test/fixtures/test.html"
+  - "test/fixtures/test.js"
+  - "test/fixtures/test.less"
 name: "YAML Manifest"
 scripts: 
   - "scripts.js"
 styles: 
+  - "test/fixtures/test.css"
+  - "test/fixtures/test.less"
   - "upstage.css"
+templates: 
+  - "test/fixtures/test.html"

@@ -26,10 +26,32 @@ module.exports = function(grunt) {
 
     // Configuration to be run (and then tested).
     manifest: {
+      bower: {
+        options: { 
+          name: 'bower-example', // (required): The name of your package.
+          version: '0.10', // A semantic version number (see semver).
+          main: '', // [string|array]: The primary endpoints of your package.
+          ignore: '', // [array]: An array of paths not needed in production that you want Bower to ignore when installing your package.
+          dependencies: '<%= pkg.dependencies %>', // [hash]: Packages your package depends upon in production.
+          devDependencies: '<%= pkg.dependencies %>' // [hash]: Development dependencies.
+        },
+        files: {
+          'test/actual/bower.json': ['none/*.none']
+        }
+      },
+      component: {
+        options: { 
+          name: 'component-example',
+          description: 'Generate a component.json file.'
+        },
+        files: {
+          'test/actual/component.json': ['none/*.none']
+        }
+      },
       debug: {
         options: { 
           debug: true,
-          name: 'Debug Example',
+          name: 'debug-example',
           description: 'Debug shows all omitted objects and properties in the output.'
         },
         files: {
@@ -58,15 +80,6 @@ module.exports = function(grunt) {
         },
         files: {
           'test/actual/metadata.json': ['none/*.none']
-        }
-      },
-      component: {
-        options: { 
-          name: 'Component Manifest',
-          description: 'Generate a component.json file.'
-        },
-        files: {
-          'test/actual/component.json': ['none/*.none']
         }
       },
       collections: {
@@ -123,16 +136,16 @@ module.exports = function(grunt) {
           name: 'Images Manifest Example'
         },
         files: {
-          'test/actual/images.json': ['test/fixtures/*.{jpg,png,gif}'],
+          'test/actual/images.json': ['test/fixtures/**/*.{jpg,png,gif}'],
         }
       },
       images_main_only: {
         options: {
-          exclude: ['images', 'dependencies'],
+          exclude: ['images', 'styles', 'javascripts', 'templates', 'fonts'],
           name: 'Images Manifest'
         },
         files: {
-          'test/actual/images-main.json': ['test/fixtures/*.{jpg,png,gif}'],
+          'test/actual/images-main.json': ['test/fixtures/**/*.{jpg,png,gif}'],
         }
       },
       cccc: {
