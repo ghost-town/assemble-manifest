@@ -24,13 +24,11 @@ engines:
 files: 
   - "presentation.pdf"
 fonts: 
-  - "test/fixtures/arial.woff"
   - "font.woff"
+gitconfig: ""
 homepage: "https://github.com/assemble/assemble-manifest"
 images: 
   - "styles.css"
-javascripts: 
-  - "test/fixtures/test.js"
 keywords: 
   - gruntplugin
   - package
@@ -42,14 +40,7 @@ keywords:
 licenses: 
   - type: MIT
     url: "https://github.com/assemble/assemble-manifest/blob/master/LICENSE-MIT"
-main: 
-  - "test/fixtures/arial.woff"
-  - "test/fixtures/test.css"
-  - "test/fixtures/test.html"
-  - "test/fixtures/test.js"
-  - "test/fixtures/test.less"
-  - "Gruntfile.js"
-manifestrc: ".manifestrc"
+main: "Gruntfile.js"
 name: "assemble-manifest"
 repository: 
   type: git
@@ -57,9 +48,5 @@ repository:
 scripts: 
   test: "grunt test"
 styles: 
-  - "test/fixtures/test.css"
-  - "test/fixtures/test.less"
   - "upstage.css"
-templates: 
-  - "test/fixtures/test.html"
 version: "0.1.3"

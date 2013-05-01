@@ -31,11 +31,8 @@
   "engines": {
     "node": ">= 0.8.0"
   },
-  "files": [],
-  "fonts": [],
+  "gitconfig": "",
   "homepage": "https://github.com/assemble/assemble-manifest",
-  "images": [],
-  "javascripts": [],
   "keywords": [
     "gruntplugin",
     "package",
@@ -51,11 +48,7 @@
       "url": "https://github.com/assemble/assemble-manifest/blob/master/LICENSE-MIT"
     }
   ],
-  "main": [
-    "test/fixtures/test.css",
-    "Gruntfile.js"
-  ],
-  "manifestrc": ".manifestrc",
+  "main": "Gruntfile.js",
   "name": "assemble-manifest",
   "repository": {
     "type": "git",
@@ -64,9 +57,5 @@
   "scripts": {
     "test": "grunt test"
   },
-  "styles": [
-    "test/fixtures/test.css"
-  ],
-  "templates": [],
   "version": "0.1.3"
 }

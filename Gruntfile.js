@@ -17,7 +17,6 @@ module.exports = function(grunt) {
       all: [
         'Gruntfile.js',
         'tasks/*.js'
-        // '<%= nodeunit.tests %>'
       ],
       options: {
         jshintrc: '.jshintrc'
@@ -27,31 +26,106 @@ module.exports = function(grunt) {
     // Configuration to be run (and then tested).
     manifest: {
       options: {
-        manifestrc: '.manifestrc', // Optional external options and metadata.
-        indent: 2,
-        debug: true,
-        sorted: true,
-        exclude: [
-          'devDependencies',
-          'dependencies'
-        ]
+        metadata: ['package.json']
       },
-      // Generate a component.json file.
+      debug: {
+        options: { 
+          debug: true,
+          name: 'Debug Example',
+          description: 'Debug shows all omitted objects and properties in the output.'
+        },
+        files: {
+          'test/actual/debug.json': ['none/*.none']
+        }
+      },
+      exclude: {
+        options: { 
+          name: 'Exclude Example',
+          description: 'The exclude option allows you to omit properties that you do not want in the dest files.',
+          metadata: ['package.json'], 
+          exclude: [
+            '*'
+          ]
+        },
+        files: {
+          'test/actual/exclude.json': ['none/*.none']
+        }
+      },
+      metadata: {
+        options: { 
+          name: 'External Metadata Source Example',
+          version: '0.1.0',
+          metadata: ['package.json'], 
+          description: 'The metadata option allows you specify an external source to supply metadata to your dest file(s).'
+        },
+        files: {
+          'test/actual/metadata.json': ['none/*.none']
+        }
+      },
       component: {
         options: { 
-          name: 'Component Manifest' 
+          name: 'Component Manifest',
+          description: 'Generate a component.json file.'
         },
-        // dest: 'test/actual/component.json'
         files: {
           'test/actual/component.json': ['none/*.none']
         }
       },
-      images: {
-        options: {
-          name: 'Images Manifest'
+      collections: {
+        options: { 
+          name: 'Collections Example',
+          collections: true,
+          description: 'Generated a manifest from "collections" of files'
         },
         files: {
-          'test/actual/images.json': ['test/fixtures/**/*.{jpg,png,gif}'],
+          'test/actual/collections.json': ['test/**/*.*']
+        }
+      },
+      indentation: {
+        options: { 
+          name: 'Indentation Example',
+          indent: 6,
+          description: 'Customize the indentation of the output. Only works for JSON'
+        },
+        files: {
+          'test/actual/indentation.json': ['test/**/*.*']
+        }
+      },
+      custom_properties: {
+        options: {
+          custom: 'Any custom properties will be written to the dest file(s) in the target or task.',
+          another: {
+            custom: 'Example'
+          }
+        },
+        files: {
+          'test/actual/custom-properties.json': ['test/**/*.*']
+        }
+      },
+      yaml: {
+        options: {
+          name: 'YAML Manifest Example',
+          format: 'yml'
+        },
+        files: {
+          'test/actual/manifest.yml': ['test/**/*.*']
+        }
+      },
+      sorted: {
+        options: { 
+          name: 'Alphabetically Sorted Example',
+          sorted: true
+        },
+        files: {
+          'test/actual/sorted.json': ['test/fixtures/bootstrap/**/*.*']
+        }
+      },
+      images: {
+        options: {
+          name: 'Images Manifest Example'
+        },
+        files: {
+          'test/actual/images.json': ['test/fixtures/*.{jpg,png,gif}'],
         }
       },
       images_main_only: {
@@ -60,11 +134,12 @@ module.exports = function(grunt) {
           name: 'Images Manifest'
         },
         files: {
-          'test/actual/images-main.json': ['test/fixtures/**/*.{jpg,png,gif}'],
+          'test/actual/images-main.json': ['test/fixtures/*.{jpg,png,gif}'],
         }
       },
-      yaml: {
+      cccc: {
         options: {
+          manifestrc: '.manifestrc',  // Optional external config options.
           name: 'YAML Manifest',
           format: 'yml',
           styles: [
@@ -78,7 +153,7 @@ module.exports = function(grunt) {
         files: {
           'test/actual/any-files1.yml': ['test/fixtures/*.*'],
           'test/actual/any-files2.yml': ['test/**/*.*']
-        }
+        }        
       },
       bootstrap: {
         options: {
@@ -86,8 +161,8 @@ module.exports = function(grunt) {
         },
         files: {
           'test/actual/bootstrap.json': [
-            'test/bootstrap/less/*.less',
-            'test/bootstrap/docs/assets/**/*.*'
+            'test/fixtures/bootstrap/less/*.less',
+            'test/fixtures/bootstrap/docs/assets/**/*.*'
           ]
         }
       },
@@ -98,21 +173,9 @@ module.exports = function(grunt) {
         },
         files: {
           'test/actual/bootstrap.yml': [
-            'test/bootstrap/less/*.less',
-            'test/bootstrap/docs/assets/**/*.js',
-            'test/bootstrap/docs/assets/fonts/*.*'
-          ]
-        }
-      },
-      bootstrap_sorted: {
-        options: {
-          sorted: true,
-          name: 'Bootstrap Manifest'
-        },
-        files: {
-          'test/actual/bootstrap_sorted.json': [
-            'test/bootstrap/less/*.less',
-            'test/bootstrap/docs/assets/**/*.*'
+            'test/fixtures/bootstrap/less/*.less',
+            'test/fixtures/bootstrap/docs/assets/**/*.js',
+            'test/fixtures/bootstrap/docs/assets/fonts/*.*'
           ]
         }
       },
@@ -122,7 +185,7 @@ module.exports = function(grunt) {
           exclude: 'main'
         },
         files: {
-          'test/actual/less.json': ['test/bootstrap/**/*.{less,js}']
+          'test/actual/less.json': ['test/fixtures/bootstrap/**/*.{less,js}']
         }
       },
       theme: {
@@ -130,8 +193,8 @@ module.exports = function(grunt) {
           name: 'Theme Manifest'
         },
         files: {
-          'test/actual/css-files.json': ['test/fixtures/*.css'],
-          'test/actual/js-files.json': ['test/fixtures/*.js']
+          'test/actual/theme-css.json': ['test/fixtures/*.css'],
+          'test/actual/theme-js.json': ['test/fixtures/*.js']
         }
       }
     },
@@ -153,6 +216,6 @@ module.exports = function(grunt) {
   grunt.registerTask('default', ['jshint', 'clean', 'manifest']);
 
   // By default, lint and run all tests.
-  // grunt.registerTask('test', ['default', 'nodeunit']);
+  grunt.registerTask('test', ['default']); // 'nodeunit'
 
 };
