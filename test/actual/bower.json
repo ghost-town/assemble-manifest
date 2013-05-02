@@ -1,8 +1,8 @@
 {
   "name": "bower-example",
-  "version": "0.10",
+  "version": "0.1.0",
   "main": [],
-  "ignore": "",
+  "ignore": [],
   "dependencies": "",
   "devDependencies": "",
   "styles": [],

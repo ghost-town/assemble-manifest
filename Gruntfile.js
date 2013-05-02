@@ -29,14 +29,14 @@ module.exports = function(grunt) {
       bower: {
         options: { 
           name: 'bower-example', // (required): The name of your package.
-          version: '0.10', // A semantic version number (see semver).
-          main: '', // [string|array]: The primary endpoints of your package.
-          ignore: '', // [array]: An array of paths not needed in production that you want Bower to ignore when installing your package.
+          version: '0.1.0',       // A semantic version number (see semver).
+          main: [],              // [string|array]: The primary endpoints of your package.
+          ignore: [],            // [array]: An array of paths not needed in production that you want Bower to ignore when installing your package.
           dependencies: '<%= pkg.dependencies %>', // [hash]: Packages your package depends upon in production.
           devDependencies: '<%= pkg.dependencies %>' // [hash]: Development dependencies.
         },
         files: {
-          'test/actual/bower.json': ['none/*.none']
+          'test/actual/bower.json': ['none']
         }
       },
       component: {
