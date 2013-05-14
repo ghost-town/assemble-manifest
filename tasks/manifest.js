@@ -15,9 +15,6 @@ module.exports = function(grunt) {
   var to   = require('to');
   var _    = grunt.util._; // lodash
 
-  // Internal libs.
-  var Utils = require('./lib/utils').init(grunt);
-
   grunt.registerMultiTask('manifest', 'Generates JSON or YAML manifests from given src files.', function() {
 
     var done = this.async();
@@ -29,8 +26,6 @@ module.exports = function(grunt) {
       collections: true,
       manifestrc: [],
       metadata: [],
-      globObj: [],
-      globObjPaths: [],
       indent: 2,
       exclude: [],
       include: [],
@@ -46,9 +41,6 @@ module.exports = function(grunt) {
       peerDependencies: pkg.peerDependencies,
       optionalDependencies: pkg.optionalDependencies
     });
-
-    options.globObj = Utils.globObject(pkg, '**');
-    options.globObjPaths = Utils.buildObjectPaths(pkg);
 
     // Supply metadata from files specified.
     _(options).merge(_.readOptionalJSON(options.metadata));
