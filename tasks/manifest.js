@@ -52,10 +52,6 @@ module.exports = function(grunt) {
     options.exclude = _.mergeOptionsArrays(this.target, 'exclude');
     options.include = _.mergeOptionsArrays(this.target, 'include');
 
-    // if (opt.dest) {
-    //   opt.dest = grunt.template.process(opt.dest);
-    // }
-
     // Default "collections"
     var defaultCollections = {
       documents  : _.union(options.documents || [], []),
@@ -191,7 +187,6 @@ module.exports = function(grunt) {
        * Default: false
        */
       var finalOptions = options.sorted ? _(optionalOptions).sortObject() : optionalOptions;
-
 
       /* Format: Generate files in either JSON or YAML format
        * Default: 'json'

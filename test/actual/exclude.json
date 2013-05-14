@@ -12,7 +12,8 @@
     "lodash": "~1.2.0",
     "mout": "~0.5.0",
     "to": "~0.2.9",
-    "graceful-fs": "~1.2.0"
+    "graceful-fs": "~1.2.0",
+    "minimatch": "~0.2.12"
   },
   "homepage": "https://github.com/assemble/assemble-manifest",
   "author": {
