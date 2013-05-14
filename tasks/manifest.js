@@ -8,29 +8,47 @@
 
 module.exports = function(grunt) {
 
-
+  // External libs.
   var fs   = require('graceful-fs');
   var path = require('path');
   var util = require('util');
   var to   = require('to');
   var _    = grunt.util._; // lodash
 
+  // Internal libs.
+  var Utils = require('./lib/utils').init(grunt);
 
   grunt.registerMultiTask('manifest', 'Generates JSON or YAML manifests from given src files.', function() {
 
     var done = this.async();
+
+    var pkg = _('./package.json').readOptionalJSON();
     
     // Default configuration options.
     var options = this.options({
       collections: true,
       manifestrc: [],
       metadata: [],
+      globObj: [],
+      globObjPaths: [],
       indent: 2,
       exclude: [],
+      include: [],
       format: 'json',
       sorted: false,
-      debug: false
+      debug: false,
+      name: pkg.name,
+      description: pkg.description,
+      version: pkg.version,
+      repo: 'assemble/assemble',
+      dependencies: pkg.dependencies,
+      devDependencies: pkg.devDependencies,
+      peerDependencies: pkg.peerDependencies,
+      optionalDependencies: pkg.optionalDependencies
     });
+
+    options.globObj = Utils.globObject(pkg, '**');
+    options.globObjPaths = Utils.buildObjectPaths(pkg);
 
     // Supply metadata from files specified.
     _(options).merge(_.readOptionalJSON(options.metadata));
@@ -40,6 +58,11 @@ module.exports = function(grunt) {
 
     // Optional array of objs/props to exclude from output.
     options.exclude = _.mergeOptionsArrays(this.target, 'exclude');
+    options.include = _.mergeOptionsArrays(this.target, 'include');
+
+    // if (opt.dest) {
+    //   opt.dest = grunt.template.process(opt.dest);
+    // }
 
     // Default "collections"
     var defaultCollections = {
@@ -61,6 +84,7 @@ module.exports = function(grunt) {
       'debug',
       'exclude',
       'format',
+      'include',
       'indent',
       'manifestrc',
       'metadata',
@@ -83,6 +107,11 @@ module.exports = function(grunt) {
         fp.src.forEach(function (src) {
           var ext = path.extname(src);
 
+          function switchCollection(type, callback) {
+            grunt.verbose.writeln('Adding ' + path.basename(src).gray + ' to ' + collections[type] + ' collection');
+            return addFileToCollection(collections[type], src);
+          }
+
           /* 
            * TODO: refactor to include default collections and
            * extensions, but also allow options to extend/override
@@ -94,42 +123,36 @@ module.exports = function(grunt) {
             case ".doc":
             case ".docx":
             case ".pdf":
-              grunt.verbose.writeln('Adding ' + path.basename(src).gray + ' to documents collection');
-              addFileToCollection(collections.documents, src);
+              switchCollection('documents');
               break;
             case ".eot":
             case ".svg":
             case ".otf":
             case ".ttf":
             case ".woff":
-              grunt.verbose.writeln('Adding ' + path.basename(src).cyan + ' to fonts collection');
-              addFileToCollection(collections.fonts, src);
+              switchCollection('fonts');
               break;
             case ".ico":
             case ".png":
             case ".gif":
             case ".jpg":
-              grunt.verbose.writeln('Adding ' + path.basename(src).magenta + ' to images collection');
-              addFileToCollection(collections.images, src);
+              switchCollection('images');
               break;
             case ".js":
             case ".coffee":
-              grunt.verbose.writeln('Adding ' + path.basename(src).blue + ' to javascripts collection');
-              addFileToCollection(collections.javascripts, src);
+              switchCollection('javascripts');
               break;
             case ".md":
             case ".markd":
             case ".markdown":
-              grunt.verbose.writeln('Adding ' + path.basename(src).cyan + ' to markdown collection');
-              addFileToCollection(collections.markdown, src);
+              switchCollection('markdown');
               break;
             case ".css":
             case ".less":
             case ".stylus":
             case ".sass":
             case ".scss":
-              grunt.verbose.writeln('Adding ' + path.basename(src).yellow + ' to styles collection');
-              addFileToCollection(collections.styles, src);
+              switchCollection('styles');
               break;
             case ".hbs":
             case ".hbr":
@@ -138,8 +161,7 @@ module.exports = function(grunt) {
             case ".htm":
             case ".mustache":
             case ".tmpl":
-              grunt.verbose.writeln('Adding ' + path.basename(src).green + ' to templates collection');
-              addFileToCollection(collections.templates, src);
+              switchCollection('templates');
               break;
             default:
               break;
@@ -191,6 +213,7 @@ module.exports = function(grunt) {
         stringifyFile = JSON.stringify;
       }
 
+      
       /* Generate files */
       // var addCollection = stringifyFile(optionalOptions, excludedKeys, options.indent);
       var addCollection = stringifyFile(finalOptions, null, options.indent);
@@ -243,14 +266,25 @@ module.exports = function(grunt) {
       } catch (e) {}
       return data;
     },
+
     /* Function from assemble https://github.com/assemble/assemble */
     mergeOptionsArrays: function(target, name) {
       var globalArray = grunt.config(['manifest', 'options', name]) || [];
       var targetArray = grunt.config(['manifest', target, 'options', name]) || [];
       return _.union(globalArray, targetArray);
     },
+
+    // extension: function(fileName) {
+    //   grunt.verbose.writeln('extension');
+    //   grunt.verbose.writeln(fileName);
+    //   if(kindOf(fileName) === "array" && fileName.length > 0) {
+    //     fileName = fileName[0];
+    //   }
+    //   return _(fileName.match(/[^.]*$/)).last();
+    // },
+    
     /* Function from assemble https://github.com/assemble/assemble */
-    getFileExtension: function(ext) {
+    dataFileReaderFactory: function(ext) {
       var reader = grunt.file.readJSON;
       switch(ext) {
         case '.json':

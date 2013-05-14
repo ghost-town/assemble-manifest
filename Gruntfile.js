@@ -9,7 +9,7 @@
 'use strict';
 
 module.exports = function(grunt) {
-
+  
   // Project configuration.
   grunt.initConfig({
   pkg: grunt.file.readJSON('package.json'),
@@ -28,6 +28,10 @@ module.exports = function(grunt) {
     manifest: {
       bower: {
         options: { 
+          collections: {
+            images: [],
+            templates: ['swig', 'hbs']
+          },
           name: 'bower-example', // (required): The name of your package.
           version: '0.1.0',       // A semantic version number (see semver).
           main: [],              // [string|array]: The primary endpoints of your package.
@@ -37,6 +41,16 @@ module.exports = function(grunt) {
         },
         files: {
           'test/actual/bower.json': ['none']
+        }
+      },
+      mout: {
+        options: { 
+          collections: {
+            js: []
+          }
+        },
+        files: {
+          'test/actual/mout.json': ['test/mout/**/*.js']
         }
       },
       component: {
