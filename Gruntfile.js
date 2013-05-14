@@ -44,11 +44,6 @@ module.exports = function(grunt) {
         }
       },
       mout: {
-        options: { 
-          collections: {
-            js: []
-          }
-        },
         files: {
           'test/actual/mout.json': ['test/mout/**/*.js']
         }
