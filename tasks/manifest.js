@@ -204,6 +204,8 @@ module.exports = function(grunt) {
       /* Generate files */
       // var addCollection = stringifyFile(optionalOptions, excludedKeys, options.indent);
       var addCollection = stringifyFile(finalOptions, null, options.indent);
+
+      
       grunt.file.write(dest, addCollection);
       grunt.log.write('Creating "' + dest.magenta + '"...'); grunt.log.ok();
     });

@@ -37,17 +37,17 @@
   "scripts": {
     "test": "grunt test"
   },
-  "devDependencies": {
+  "dependencies": {
+    "graceful-fs": "~1.2.0",
     "grunt": "~0.4.1",
     "grunt-contrib-clean": "~0.4.1",
     "grunt-contrib-jshint": "~0.4.3",
     "grunt-contrib-nodeunit": "~0.1.2",
     "js-yaml": "~2.0.4",
     "lodash": "~1.2.0",
+    "minimatch": "~0.2.12",
     "mout": "~0.5.0",
-    "to": "~0.2.9",
-    "graceful-fs": "~1.2.0",
-    "minimatch": "~0.2.12"
+    "to": "~0.2.9"
   },
   "keywords": [
     "gruntplugin",
