@@ -81,9 +81,9 @@ module.exports = function(grunt) {
     var defaultCollections = {
       main: _.union(options.main || [], [])
     };
-
     // Collection "defaults"
     // _(options).merge({collections: {styles: ['css', 'less', 'stylus', 'sass', 'scss'] } });
+
 
     // build collection extension map
     var extCollectionMap = {};
@@ -116,31 +116,29 @@ module.exports = function(grunt) {
         collections[key] = [];
       });
 
-      if (options.collections !== false) {
-        fp.src.forEach(function (src) {
-          var ext = path.extname(src);
+      fp.src.forEach(function (src) {
+        var ext = path.extname(src);
 
-          function switchCollection(type, callback) {
-            grunt.verbose.writeln('Adding ' + path.basename(src).red + ' to ' + collections[type].red + ' collection');
-            return addFileToCollection(collections[type], src);
-          }
+        function switchCollection(type, callback) {
+          grunt.verbose.writeln('Adding ' + path.basename(src).red + ' to ' + collections[type].red + ' collection');
+          return addFileToCollection(collections[type], src);
+        }
 
-          /**
-           * TODO: refactor to include default collections and
-           * extensions, but also allow options to extend/override
-           * with custom collections and extensions.
-           */
-          _.each(extCollectionMap[ext], function(colName) {
-            switchCollection(colName);
-          });
-
-          addFileToCollection(collections.main, src);
+        /**
+         * TODO: refactor to include default collections and
+         * extensions, but also allow options to extend/override
+         * with custom collections and extensions.
+         */
+        _.each(extCollectionMap[ext], function(colName) {
+          switchCollection(colName);
         });
 
-        _.forOwn(collections, function(value, key) {
-          options[key] = _.union(collections[key], defaultCollections[key]);
-        });
-      }
+        addFileToCollection(collections.main, src);
+      });
+
+      _.forOwn(collections, function(value, key) {
+        options[key] = _.union(collections[key], defaultCollections[key]);
+      });
       // grunt.verbose.writeln(util.inspect(this.files, 10, null));
 
       /**
@@ -183,7 +181,7 @@ module.exports = function(grunt) {
        */
       var addCollection = stringifyFile(finalOptions, null, options.indent);
       grunt.file.write(dest, addCollection);
-      
+
       grunt.log.write('Creating "' + dest.magenta + '"...'); grunt.log.ok();
     });
 
