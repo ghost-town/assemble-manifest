@@ -27,6 +27,7 @@ main:
   - "test/actual/images-main.json"
   - "test/actual/images.json"
   - "test/actual/indentation.json"
+  - "test/actual/lodashify/test.json"
   - "test/actual/manifest.yml"
   - "test/actual/metadata.json"
   - "test/actual/mout.json"
@@ -659,6 +660,13 @@ main:
   - "test/mout/time/now.js"
   - "test/mout/time/parseMs.js"
   - "test/mout/time/toTimeString.js"
+  - "test/pkg/expected/component_default.json"
+  - "test/pkg/expected/component_dependencies.json"
+  - "test/pkg/expected/component_main.json"
+  - "test/pkg/fixtures/package_default.json"
+  - "test/pkg/temp/component_default.json"
+  - "test/pkg/temp/component_dependencies.json"
+  - "test/pkg/temp/component_main.json"
 name: "YAML Manifest"
 optionalDependencies: null
 peerDependencies: null

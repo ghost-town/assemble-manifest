@@ -19,6 +19,7 @@
     "test/actual/component.json",
     "test/actual/debug.json",
     "test/actual/exclude.json",
+    "test/actual/lodashify/test.json",
     "test/actual/metadata.json",
     "test/actual/mout.json",
     "test/collections.json",
@@ -648,6 +649,13 @@
     "test/mout/time.js",
     "test/mout/time/now.js",
     "test/mout/time/parseMs.js",
-    "test/mout/time/toTimeString.js"
+    "test/mout/time/toTimeString.js",
+    "test/pkg/expected/component_default.json",
+    "test/pkg/expected/component_dependencies.json",
+    "test/pkg/expected/component_main.json",
+    "test/pkg/fixtures/package_default.json",
+    "test/pkg/temp/component_default.json",
+    "test/pkg/temp/component_dependencies.json",
+    "test/pkg/temp/component_main.json"
   ]
 }

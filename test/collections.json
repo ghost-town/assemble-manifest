@@ -1,0 +1,47 @@
+{
+  "documents": [
+    ".md",
+    ".txt",
+    ".doc",
+    ".docx",
+    ".pdf"
+  ],
+  "fonts": [
+    ".eot",
+    ".svg",
+    ".otf",
+    ".ttf",
+    ".woff"
+  ],
+  "images": [
+    ".ico",
+    ".png",
+    ".gif",
+    ".jpg"
+  ],
+  "javascripts": [
+    ".js",
+    ".coffee"
+  ],
+  "markdown": [
+    ".md",
+    ".markd",
+    ".markdown"
+  ],
+  "styles": [
+    ".css",
+    ".less",
+    ".stylus",
+    ".sass",
+    ".scss"
+  ],
+  "templates": [
+    ".hbs",
+    ".hbr",
+    ".handlebars",
+    ".html",
+    ".htm",
+    ".mustache",
+    ".tmpl"
+  ]
+}

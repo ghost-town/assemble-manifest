@@ -1,0 +1,9 @@
+{
+  "name": "my_component",
+  "version": "0.1.0",
+  "main": "main.js",
+  "dependencies": {
+    "jquery": "1.9.2",
+    "backbone": "1.0.0"
+  }
+}

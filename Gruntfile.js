@@ -250,6 +250,42 @@ module.exports = function(grunt) {
       }
     },
 
+    lodashify: {
+      test: {
+        src: 'test/mout',
+        dest: 'test/actual/lodashify/test.json'
+      }
+    },
+
+    metadata: {
+      options: {
+        props: ['name', 'version', 'main', 'dependencies', 'devDependencies', 'contributors', 'version']
+      },
+      example: {
+        options: {
+          pkg: 'test/pkg/fixtures/package_default.json',
+          component: 'test/pkg/temp/component_default.json'
+        }
+      },
+      main: {
+        options: {
+          pkg: 'test/pkg/fixtures/package_default.json',
+          component: 'test/pkg/temp/component_main.json',
+          main: ['a.js']
+        }
+      },
+      deps: {
+        options: {
+          pkg: 'test/pkg/fixtures/package_default.json',
+          component: 'test/pkg/temp/component_dependencies.json',
+          dependencies: {
+            'jquery': '1.9.2',
+            'backbone': '1.0.0'
+          }
+        }
+      },
+    },
+
     // Configuration to be run (and then tested).
     clean: {
       json: ['test/actual/*.{json,yml}']
