@@ -20,10 +20,10 @@ module.exports = function(grunt) {
     var done = this.async();
 
     var pkg = _('./package.json').readOptionalJSON();
-    
+
     // Default configuration options.
     var options = this.options({
-      collections: true,
+      //collections: true,
       manifestrc: [],
       metadata: [],
       indent: 2,
@@ -52,19 +52,37 @@ module.exports = function(grunt) {
     options.exclude = _.mergeOptionsArrays(this.target, 'exclude');
     options.include = _.mergeOptionsArrays(this.target, 'include');
 
+
     // Default "collections"
     var defaultCollections = {
-      documents  : _.union(options.documents || [], []),
-      fonts      : _.union(options.fonts || [], []),
-      images     : _.union(options.images || [], []),
-      javascripts: _.union(options.javascripts || [], []),
-      main       : _.union(options.main || [], []),
-      markdown   : _.union(options.markdown || [], []),
-      styles     : _.union(options.styles || [], []),
-      templates  : _.union(options.templates || [], [])
+      main       : _.union(options.main || [], [])
     };
 
-    /* Default objects and properties excluded from output. 
+    // build collection extension map
+    var extCollectionMap = {};
+    if(options.collections) {
+      _.forOwn(options.collections, function(value, key) {
+        if(!Array.isArray(value)) {
+          value = [value];
+        }
+        _.each(value, function(ext) {
+          if(ext.indexOf('.') !== 0) {
+            ext = '.' + ext;
+          }
+          if(!extCollectionMap[ext]) {
+            extCollectionMap[ext] = [];
+          }
+          extCollectionMap[ext].push(key);
+        });
+
+        // add collection to defaultCollections
+        if(!defaultCollections[key]) {
+          defaultCollections[key] = _.union(options[key] || [], []);
+        }
+      });
+    }
+
+    /* Default objects and properties excluded from output.
      * When debug is set to "true" these are shown.
      */
     var defaultOmissions = _.defaults([
@@ -81,15 +99,10 @@ module.exports = function(grunt) {
 
     this.files.forEach(function(fp) {
       var dest = fp.dest;
-      var collections = {
-        documents: [],
-        fonts: [],
-        images: [],
-        javascripts: [],
-        main: [],
-        styles: [],
-        templates: []
-      };
+      var collections = {};
+      _.forOwn(defaultCollections, function(value, key) {
+        collections[key] = [];
+      });
 
       if (options.collections !== false) {
         fp.src.forEach(function (src) {
@@ -100,73 +113,77 @@ module.exports = function(grunt) {
             return addFileToCollection(collections[type], src);
           }
 
-          /* 
+          /*
            * TODO: refactor to include default collections and
            * extensions, but also allow options to extend/override
-           * with custom collections and extensions. 
-           */ 
-          switch (ext) {
-            case ".md":
-            case ".txt":
-            case ".doc":
-            case ".docx":
-            case ".pdf":
-              switchCollection('documents');
-              break;
-            case ".eot":
-            case ".svg":
-            case ".otf":
-            case ".ttf":
-            case ".woff":
-              switchCollection('fonts');
-              break;
-            case ".ico":
-            case ".png":
-            case ".gif":
-            case ".jpg":
-              switchCollection('images');
-              break;
-            case ".js":
-            case ".coffee":
-              switchCollection('javascripts');
-              break;
-            case ".md":
-            case ".markd":
-            case ".markdown":
-              switchCollection('markdown');
-              break;
-            case ".css":
-            case ".less":
-            case ".stylus":
-            case ".sass":
-            case ".scss":
-              switchCollection('styles');
-              break;
-            case ".hbs":
-            case ".hbr":
-            case ".handlebars":
-            case ".html":
-            case ".htm":
-            case ".mustache":
-            case ".tmpl":
-              switchCollection('templates');
-              break;
-            default:
-              break;
-          }
+           * with custom collections and extensions.
+           */
+          _.each(extCollectionMap[ext], function(colName) {
+            switchCollection(colName);
+          });
+
+          /*
+           * TODO: should the following be added as defaults?
+           */
+          // switch (ext) {
+          //   case ".md":
+          //   case ".txt":
+          //   case ".doc":
+          //   case ".docx":
+          //   case ".pdf":
+          //     switchCollection('documents');
+          //     break;
+          //   case ".eot":
+          //   case ".svg":
+          //   case ".otf":
+          //   case ".ttf":
+          //   case ".woff":
+          //     switchCollection('fonts');
+          //     break;
+          //   case ".ico":
+          //   case ".png":
+          //   case ".gif":
+          //   case ".jpg":
+          //     switchCollection('images');
+          //     break;
+          //   case ".js":
+          //   case ".coffee":
+          //     switchCollection('javascripts');
+          //     break;
+          //   case ".md":
+          //   case ".markd":
+          //   case ".markdown":
+          //     switchCollection('markdown');
+          //     break;
+          //   case ".css":
+          //   case ".less":
+          //   case ".stylus":
+          //   case ".sass":
+          //   case ".scss":
+          //     switchCollection('styles');
+          //     break;
+          //   case ".hbs":
+          //   case ".hbr":
+          //   case ".handlebars":
+          //   case ".html":
+          //   case ".htm":
+          //   case ".mustache":
+          //   case ".tmpl":
+          //     switchCollection('templates');
+          //     break;
+          //   default:
+          //     break;
+          // }
           grunt.verbose.writeln(util.inspect(this.files, 10, null));
           addFileToCollection(collections.main, src);
 
 
         });
 
-        options.main        = _.union(collections.main, defaultCollections.main);
-        options.styles      = _.union(collections.styles, defaultCollections.styles);
-        options.javascripts = _.union(collections.javascripts, defaultCollections.javascripts);
-        options.templates   = _.union(collections.templates, defaultCollections.templates);
-        options.images      = _.union(collections.images, defaultCollections.images);
-        options.fonts       = _.union(collections.fonts, defaultCollections.fonts);
-      } 
+        _.forOwn(collections, function(value, key) {
+          options[key] = _.union(collections[key], defaultCollections[key]);
+        });
+      }
       grunt.verbose.writeln(util.inspect(this.files, 10, null));
 
       /* options.debug
@@ -200,12 +217,12 @@ module.exports = function(grunt) {
         stringifyFile = JSON.stringify;
       }
 
-      
+
       /* Generate files */
       // var addCollection = stringifyFile(optionalOptions, excludedKeys, options.indent);
       var addCollection = stringifyFile(finalOptions, null, options.indent);
 
-      
+
       grunt.file.write(dest, addCollection);
       grunt.log.write('Creating "' + dest.magenta + '"...'); grunt.log.ok();
     });
@@ -271,7 +288,7 @@ module.exports = function(grunt) {
     //   }
     //   return _(fileName.match(/[^.]*$/)).last();
     // },
-    
+
     /* Function from assemble https://github.com/assemble/assemble */
     dataFileReaderFactory: function(ext) {
       var reader = grunt.file.readJSON;
