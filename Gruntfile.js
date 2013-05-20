@@ -29,14 +29,14 @@ module.exports = function(grunt) {
       bower: {
         options: {
           collections: {
-            images: [],
+            images: [''],
             templates: ['swig', 'hbs']
           },
           name: 'bower-example', // (required): The name of your package.
-          version: '0.1.0',       // A semantic version number (see semver).
+          version: '0.1.0',      // A semantic version number (see semver).
           main: [],              // [string|array]: The primary endpoints of your package.
           ignore: [],            // [array]: An array of paths not needed in production that you want Bower to ignore when installing your package.
-          dependencies: '<%= pkg.dependencies %>', // [hash]: Packages your package depends upon in production.
+          dependencies: '<%= pkg.dependencies %>',   // [hash]: Packages your package depends upon in production.
           devDependencies: '<%= pkg.dependencies %>' // [hash]: Development dependencies.
         },
         files: {
@@ -146,9 +146,9 @@ module.exports = function(grunt) {
         }
       },
       images: {
-        options: {
-          name: 'Images Manifest Example'
-        },
+        // options: {
+        //   name: 'Images Manifest Example'
+        // },
         files: {
           'test/actual/images.json': ['test/fixtures/**/*.{jpg,png,gif}'],
         }
@@ -182,6 +182,10 @@ module.exports = function(grunt) {
       },
       bootstrap: {
         options: {
+          collections: {
+            images: ['jpg', 'png', 'ico'],
+            templates: ['mustache']
+          },
           name: 'Bootstrap Manifest'
         },
         files: {
@@ -227,12 +231,21 @@ module.exports = function(grunt) {
           name: 'Dynamic Collections',
           collections: {
             images: ['jpg', 'png', 'gif'],
-            templates: 'hbs',
+            templates: ['hbs', 'html'],
             javascripts: ['js', 'coffee']
           }
         },
         files: {
           'test/actual/dynamic.json': ['test/fixtures/**/*.*']
+        }
+      },
+      dynamic2: {
+        options: {
+          name: 'Dynamic Collections',
+          collections: grunt.file.readJSON('test/collections.json')
+        },
+        files: {
+          'test/actual/dynamic2.json': ['test/fixtures/**/*.*']
         }
       }
     },

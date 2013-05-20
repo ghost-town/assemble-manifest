@@ -3,13 +3,30 @@
   "description": "Generates JSON and/or YAML manifest files from given source files or directories or source files.",
   "version": "0.1.0",
   "repo": "assemble/assemble",
-  "dependencies": "",
-  "devDependencies": "",
+  "dependencies": {
+    "graceful-fs": "~1.2.0",
+    "grunt": "~0.4.1",
+    "grunt-contrib-clean": "~0.4.1",
+    "grunt-contrib-jshint": "~0.4.3",
+    "grunt-contrib-nodeunit": "~0.1.2",
+    "js-yaml": "~2.0.4",
+    "lodash": "~1.2.0",
+    "minimatch": "~0.2.12",
+    "to": "~0.2.9"
+  },
+  "devDependencies": {
+    "graceful-fs": "~1.2.0",
+    "grunt": "~0.4.1",
+    "grunt-contrib-clean": "~0.4.1",
+    "grunt-contrib-jshint": "~0.4.3",
+    "grunt-contrib-nodeunit": "~0.1.2",
+    "js-yaml": "~2.0.4",
+    "lodash": "~1.2.0",
+    "minimatch": "~0.2.12",
+    "to": "~0.2.9"
+  },
   "main": [],
   "ignore": [],
-  "styles": [],
-  "javascripts": [],
-  "templates": [],
   "images": [],
-  "fonts": []
+  "templates": []
 }

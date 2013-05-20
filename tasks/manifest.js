@@ -15,23 +15,31 @@ module.exports = function(grunt) {
   var to   = require('to');
   var _    = grunt.util._; // lodash
 
-  grunt.registerMultiTask('manifest', 'Generates JSON or YAML manifests from given src files.', function() {
+  // Internal lib
+  _.mixin(require('./lib/mixins').init(grunt));
 
+  grunt.registerMultiTask('manifest', 'Generates JSON or YAML manifests from given src files.', function() {
     var done = this.async();
 
     var pkg = _('./package.json').readOptionalJSON();
 
     // Default configuration options.
     var options = this.options({
-      //collections: true,
+      // Misc
       manifestrc: [],
-      metadata: [],
-      indent: 2,
-      exclude: [],
-      include: [],
+      debug: false,
+      
+      // Formatting
       format: 'json',
       sorted: false,
-      debug: false,
+      indent: 2,
+
+      // Metadata
+      metadata: [],
+      exclude: [],
+      include: [],
+
+      // Defaults
       name: pkg.name,
       description: pkg.description,
       version: pkg.version,
@@ -41,6 +49,22 @@ module.exports = function(grunt) {
       peerDependencies: pkg.peerDependencies,
       optionalDependencies: pkg.optionalDependencies
     });
+
+    /**
+     * Default objects and properties excluded from output.
+     * When debug is set to "true" these are shown.
+     */
+    var defaultOmissions = _.defaults([
+      'collections',
+      'debug',
+      'exclude',
+      'format',
+      'include',
+      'indent',
+      'manifestrc',
+      'metadata',
+      'sorted'
+    ]);
 
     // Supply metadata from files specified.
     _(options).merge(_.readOptionalJSON(options.metadata));
@@ -55,8 +79,11 @@ module.exports = function(grunt) {
 
     // Default "collections"
     var defaultCollections = {
-      main       : _.union(options.main || [], [])
+      main: _.union(options.main || [], [])
     };
+
+    // Collection "defaults"
+    // _(options).merge({collections: {styles: ['css', 'less', 'stylus', 'sass', 'scss'] } });
 
     // build collection extension map
     var extCollectionMap = {};
@@ -82,21 +109,6 @@ module.exports = function(grunt) {
       });
     }
 
-    /* Default objects and properties excluded from output.
-     * When debug is set to "true" these are shown.
-     */
-    var defaultOmissions = _.defaults([
-      'collections',
-      'debug',
-      'exclude',
-      'format',
-      'include',
-      'indent',
-      'manifestrc',
-      'metadata',
-      'sorted'
-    ]);
-
     this.files.forEach(function(fp) {
       var dest = fp.dest;
       var collections = {};
@@ -109,11 +121,11 @@ module.exports = function(grunt) {
           var ext = path.extname(src);
 
           function switchCollection(type, callback) {
-            grunt.verbose.writeln('Adding ' + path.basename(src).gray + ' to ' + collections[type] + ' collection');
+            grunt.verbose.writeln('Adding ' + path.basename(src).red + ' to ' + collections[type].red + ' collection');
             return addFileToCollection(collections[type], src);
           }
 
-          /*
+          /**
            * TODO: refactor to include default collections and
            * extensions, but also allow options to extend/override
            * with custom collections and extensions.
@@ -122,72 +134,17 @@ module.exports = function(grunt) {
             switchCollection(colName);
           });
 
-          /*
-           * TODO: should the following be added as defaults?
-           */
-          // switch (ext) {
-          //   case ".md":
-          //   case ".txt":
-          //   case ".doc":
-          //   case ".docx":
-          //   case ".pdf":
-          //     switchCollection('documents');
-          //     break;
-          //   case ".eot":
-          //   case ".svg":
-          //   case ".otf":
-          //   case ".ttf":
-          //   case ".woff":
-          //     switchCollection('fonts');
-          //     break;
-          //   case ".ico":
-          //   case ".png":
-          //   case ".gif":
-          //   case ".jpg":
-          //     switchCollection('images');
-          //     break;
-          //   case ".js":
-          //   case ".coffee":
-          //     switchCollection('javascripts');
-          //     break;
-          //   case ".md":
-          //   case ".markd":
-          //   case ".markdown":
-          //     switchCollection('markdown');
-          //     break;
-          //   case ".css":
-          //   case ".less":
-          //   case ".stylus":
-          //   case ".sass":
-          //   case ".scss":
-          //     switchCollection('styles');
-          //     break;
-          //   case ".hbs":
-          //   case ".hbr":
-          //   case ".handlebars":
-          //   case ".html":
-          //   case ".htm":
-          //   case ".mustache":
-          //   case ".tmpl":
-          //     switchCollection('templates');
-          //     break;
-          //   default:
-          //     break;
-          // }
-          grunt.verbose.writeln(util.inspect(this.files, 10, null));
           addFileToCollection(collections.main, src);
-
-
         });
 
         _.forOwn(collections, function(value, key) {
           options[key] = _.union(collections[key], defaultCollections[key]);
         });
       }
-      grunt.verbose.writeln(util.inspect(this.files, 10, null));
+      // grunt.verbose.writeln(util.inspect(this.files, 10, null));
 
-      /* options.debug
-       *
+      /**
+       * options.debug
        * Default: 'false'
        * Shows all properies and objects in generated files,
        * including those "excluded" by default or in the task
@@ -200,12 +157,14 @@ module.exports = function(grunt) {
         optionalOptions = filteredOptions;
       }
 
-      /* Sorted: boolean. Sort objects and properties alphabetically
+      /**
+       * Sorted: boolean. Sort objects and properties alphabetically
        * Default: false
        */
       var finalOptions = options.sorted ? _(optionalOptions).sortObject() : optionalOptions;
 
-      /* Format: Generate files in either JSON or YAML format
+      /**
+       * Format: Generate files in either JSON or YAML format
        * Default: 'json'
        */
       var stringifyFile;
@@ -217,93 +176,21 @@ module.exports = function(grunt) {
         stringifyFile = JSON.stringify;
       }
 
-
-      /* Generate files */
-      // var addCollection = stringifyFile(optionalOptions, excludedKeys, options.indent);
+      /**
+       * Generate files
+       */
       var addCollection = stringifyFile(finalOptions, null, options.indent);
-
-
       grunt.file.write(dest, addCollection);
+      
       grunt.log.write('Creating "' + dest.magenta + '"...'); grunt.log.ok();
     });
 
     // Print a success message.
-
     done();
   }); // end of task
 
 
-
-  /* UTILITY FUNCTIONS
-   * ================= */
-
   var addFileToCollection = function(collection, file) {
     collection.push(file);
   };
-
-  _.mixin({
-    sortObject: function(o) {
-      var sorted = {},
-      key, a = [];
-      for (key in o) {
-        if (o.hasOwnProperty(key)) {
-          a.push(key);
-        }
-      }
-      a.sort();
-      for (key = 0; key < a.length; key++) {
-        sorted[a[key]] = o[a[key]];
-      }
-      return sorted;
-    },
-
-    /* Read optional JSON from Ben Alman, https://gist.github.com/2876125 */
-    readOptionalJSON: function(filepath) {
-      var data = {};
-      try {
-        data = grunt.file.readJSON(filepath);
-      } catch (e) {}
-      return data;
-    },
-    readOptionalYAML: function(filepath) {
-      var data = {};
-      try {
-        data = grunt.file.readYAML(filepath);
-      } catch (e) {}
-      return data;
-    },
-
-    /* Function from assemble https://github.com/assemble/assemble */
-    mergeOptionsArrays: function(target, name) {
-      var globalArray = grunt.config(['manifest', 'options', name]) || [];
-      var targetArray = grunt.config(['manifest', target, 'options', name]) || [];
-      return _.union(globalArray, targetArray);
-    },
-
-    // extension: function(fileName) {
-    //   grunt.verbose.writeln('extension');
-    //   grunt.verbose.writeln(fileName);
-    //   if(kindOf(fileName) === "array" && fileName.length > 0) {
-    //     fileName = fileName[0];
-    //   }
-    //   return _(fileName.match(/[^.]*$/)).last();
-    // },
-
-    /* Function from assemble https://github.com/assemble/assemble */
-    dataFileReaderFactory: function(ext) {
-      var reader = grunt.file.readJSON;
-      switch(ext) {
-        case '.json':
-          reader = grunt.file.readJSON;
-          break;
-
-        case '.yml':
-        case '.yaml':
-          reader = grunt.file.readYAML;
-          break;
-      }
-      return reader;
-    }
-  });
 };
-

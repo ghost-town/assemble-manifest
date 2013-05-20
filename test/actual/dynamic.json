@@ -12,7 +12,6 @@
     "js-yaml": "~2.0.4",
     "lodash": "~1.2.0",
     "minimatch": "~0.2.12",
-    "mout": "~0.5.0",
     "to": "~0.2.9"
   },
   "main": [
@@ -225,7 +224,33 @@
     "test/fixtures/images/loaders/16x16.gif",
     "test/fixtures/images/twitter.png"
   ],
-  "templates": [],
+  "templates": [
+    "test/fixtures/bootstrap/docs/_includes/colophon.html",
+    "test/fixtures/bootstrap/docs/_includes/docs-nav.html",
+    "test/fixtures/bootstrap/docs/_includes/footer.html",
+    "test/fixtures/bootstrap/docs/_includes/header.html",
+    "test/fixtures/bootstrap/docs/_includes/navbar.html",
+    "test/fixtures/bootstrap/docs/_layouts/default.html",
+    "test/fixtures/bootstrap/docs/_layouts/example.html",
+    "test/fixtures/bootstrap/docs/_layouts/home.html",
+    "test/fixtures/bootstrap/docs/customize.html",
+    "test/fixtures/bootstrap/docs/docs.html",
+    "test/fixtures/bootstrap/docs/examples/carousel.html",
+    "test/fixtures/bootstrap/docs/examples/grid.html",
+    "test/fixtures/bootstrap/docs/examples/jumbotron-narrow.html",
+    "test/fixtures/bootstrap/docs/examples/jumbotron.html",
+    "test/fixtures/bootstrap/docs/examples/justified-nav.html",
+    "test/fixtures/bootstrap/docs/examples/navbar-fixed-top.html",
+    "test/fixtures/bootstrap/docs/examples/navbar-static-top.html",
+    "test/fixtures/bootstrap/docs/examples/navbar.html",
+    "test/fixtures/bootstrap/docs/examples/signin.html",
+    "test/fixtures/bootstrap/docs/examples/starter-template.html",
+    "test/fixtures/bootstrap/docs/examples/sticky-footer-navbar.html",
+    "test/fixtures/bootstrap/docs/examples/sticky-footer.html",
+    "test/fixtures/bootstrap/docs/index.html",
+    "test/fixtures/bootstrap/js/tests/index.html",
+    "test/fixtures/test.html"
+  ],
   "javascripts": [
     "test/fixtures/bootstrap/docs/assets/js/application.js",
     "test/fixtures/bootstrap/docs/assets/js/bootstrap-affix.js",
