@@ -31,7 +31,7 @@ exports.init = function(grunt) {
     },
 
     /**
-     * Read optional JSON from Ben Alman, 
+     * Read optional JSON from Ben Alman,
      * https://gist.github.com/2876125
      */
     readOptionalJSON: function(filepath) {
@@ -65,7 +65,7 @@ exports.init = function(grunt) {
      */
     dataFileReaderFactory: function(ext) {
       var reader = grunt.file.readJSON;
-      switch(ext) {
+      switch (ext) {
         case '.json':
           reader = grunt.file.readJSON;
           break;
@@ -76,8 +76,29 @@ exports.init = function(grunt) {
           break;
       }
       return reader;
-    }
-  });
+    },
 
+    deepExtend: function(obj) {
+      var deepMerge = function(target, source) {
+        for (var key in source) {
+          var original = target[key];
+          var next = source[key];
+          if (original && next && typeof next == "object") {
+            deepMerge(original, next);
+          } else {
+            target[key] = next;
+          }
+        }
+        return target;
+      };
+
+      _.each(Array.prototype.slice.call(arguments, 1), function(source) {
+        deepMerge(obj, source);
+      });
+
+      return obj;
+    }
+
+  });
   return exports;
 };
