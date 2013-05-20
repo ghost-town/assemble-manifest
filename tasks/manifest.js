@@ -54,19 +54,9 @@ module.exports = function(grunt) {
      * Default objects and properties excluded from output.
      * When debug is set to "true" these are shown.
      */
-    var defaultOmissions = _.defaults([
-      'collections',
-      'debug',
-      'exclude',
-      'format',
-      'include',
-      'indent',
-      'manifestrc',
-      'metadata',
-      'sorted'
-    ]);
+    var defaultOmissions = _.defaults(['collections', 'debug', 'exclude', 'format', 'include', 'indent', 'manifestrc', 'metadata', 'sorted']);
 
-    // Supply metadata from files specified.
+    // Supply metadata from given file.
     _(options).merge(_.readOptionalJSON(options.metadata));
 
     // Use .manifestrc file if one has been specified.
@@ -81,11 +71,8 @@ module.exports = function(grunt) {
     var defaultCollections = {
       main: _.union(options.main || [], [])
     };
-    // Collection "defaults"
-    // _(options).merge({collections: {styles: ['css', 'less', 'stylus', 'sass', 'scss'] } });
 
-
-    // build collection extension map
+    // Build collection extension map
     var extCollectionMap = {};
     if(options.collections) {
       _.forOwn(options.collections, function(value, key) {
@@ -102,7 +89,7 @@ module.exports = function(grunt) {
           extCollectionMap[ext].push(key);
         });
 
-        // add collection to defaultCollections
+        // Add collection to defaultCollections
         if(!defaultCollections[key]) {
           defaultCollections[key] = _.union(options[key] || [], []);
         }
@@ -123,12 +110,6 @@ module.exports = function(grunt) {
           grunt.verbose.writeln('Adding ' + path.basename(src).red + ' to ' + collections[type].red + ' collection');
           return addFileToCollection(collections[type], src);
         }
-
-        /**
-         * TODO: refactor to include default collections and
-         * extensions, but also allow options to extend/override
-         * with custom collections and extensions.
-         */
         _.each(extCollectionMap[ext], function(colName) {
           switchCollection(colName);
         });
@@ -142,10 +123,9 @@ module.exports = function(grunt) {
       // grunt.verbose.writeln(util.inspect(this.files, 10, null));
 
       /**
-       * options.debug
-       * Default: 'false'
-       * Shows all properies and objects in generated files,
+       * Debug: boolean. Shows all properies and objects in generated files,
        * including those "excluded" by default or in the task
+       * Default: 'false'
        */
       var optionalOptions;
       var filteredOptions = _.omit(options, options.exclude, defaultOmissions);
@@ -176,9 +156,7 @@ module.exports = function(grunt) {
         return stringifyFile;
       };
 
-      /**
-       * Generate files
-       */
+      // Generate files
       var addCollection = stringifyFile(finalOptions, null, options.indent);
       grunt.file.write(dest, addCollection);
 
