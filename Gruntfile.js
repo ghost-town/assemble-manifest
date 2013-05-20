@@ -9,7 +9,7 @@
 'use strict';
 
 module.exports = function(grunt) {
-  
+
   // Project configuration.
   grunt.initConfig({
   pkg: grunt.file.readJSON('package.json'),
@@ -27,7 +27,7 @@ module.exports = function(grunt) {
     // Configuration to be run (and then tested).
     manifest: {
       bower: {
-        options: { 
+        options: {
           collections: {
             images: [],
             templates: ['swig', 'hbs']
@@ -44,7 +44,7 @@ module.exports = function(grunt) {
         }
       },
       mout: {
-        options: { 
+        options: {
           collections: {
             js: []
           }
@@ -54,7 +54,7 @@ module.exports = function(grunt) {
         }
       },
       component: {
-        options: { 
+        options: {
           name: 'component-example',
           description: 'Generate a component.json file.'
         },
@@ -63,7 +63,7 @@ module.exports = function(grunt) {
         }
       },
       debug: {
-        options: { 
+        options: {
           debug: true,
           name: 'debug-example',
           description: 'Debug shows all omitted objects and properties in the output.'
@@ -73,10 +73,10 @@ module.exports = function(grunt) {
         }
       },
       exclude: {
-        options: { 
+        options: {
           name: 'Exclude Example',
           description: 'The exclude option allows you to omit properties that you do not want in the dest files.',
-          metadata: ['package.json'], 
+          metadata: ['package.json'],
           exclude: [
             '*'
           ]
@@ -86,10 +86,10 @@ module.exports = function(grunt) {
         }
       },
       metadata: {
-        options: { 
+        options: {
           name: 'External Metadata Source Example',
           version: '0.1.0',
-          metadata: ['package.json'], 
+          metadata: ['package.json'],
           description: 'The metadata option allows you specify an external source to supply metadata to your dest file(s).'
         },
         files: {
@@ -97,7 +97,7 @@ module.exports = function(grunt) {
         }
       },
       collections: {
-        options: { 
+        options: {
           name: 'Collections Example',
           collections: true,
           description: 'Generated a manifest from "collections" of files'
@@ -107,7 +107,7 @@ module.exports = function(grunt) {
         }
       },
       indentation: {
-        options: { 
+        options: {
           name: 'Indentation Example',
           indent: 6,
           description: 'Customize the indentation of the output. Only works for JSON'
@@ -137,7 +137,7 @@ module.exports = function(grunt) {
         }
       },
       sorted: {
-        options: { 
+        options: {
           name: 'Alphabetically Sorted Example',
           sorted: true
         },
@@ -178,7 +178,7 @@ module.exports = function(grunt) {
         files: {
           'test/actual/any-files1.yml': ['test/fixtures/*.*'],
           'test/actual/any-files2.yml': ['test/**/*.*']
-        }        
+        }
       },
       bootstrap: {
         options: {
@@ -220,6 +220,19 @@ module.exports = function(grunt) {
         files: {
           'test/actual/theme-css.json': ['test/fixtures/*.css'],
           'test/actual/theme-js.json': ['test/fixtures/*.js']
+        }
+      },
+      dynamic: {
+        options: {
+          name: 'Dynamic Collections',
+          collections: {
+            images: ['jpg', 'png', 'gif'],
+            templates: 'hbs',
+            javascripts: ['js', 'coffee']
+          }
+        },
+        files: {
+          'test/actual/dynamic.json': ['test/fixtures/**/*.*']
         }
       }
     },
