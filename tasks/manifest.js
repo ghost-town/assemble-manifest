@@ -145,13 +145,13 @@ module.exports = function(grunt) {
        * Format: Generate files in either JSON or YAML format
        * Default: 'json'
        */
-      var stringifyFile = function(opts, n, indent) {
+      var stringifyFile = function(opts, values, indent) {
         var YAML = to.format.yaml;
         var outputFormat = ((options.format).toLowerCase());
         if (outputFormat === 'yaml' || outputFormat === 'yml') {
-          stringifyFile = YAML.stringify(opts, n, indent);
+          stringifyFile = YAML.stringify(opts, values, indent);
         } else {
-          stringifyFile = JSON.stringify(opts, n, indent);
+          stringifyFile = JSON.stringify(opts, values, indent);
         }
         return stringifyFile;
       };
