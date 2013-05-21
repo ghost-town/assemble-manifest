@@ -251,9 +251,26 @@ module.exports = function(grunt) {
     },
 
     lodashify: {
-      test: {
+      options: {
+        basepath: 'basepath'
+      },
+      mout: {
         src: 'test/mout',
-        dest: 'test/actual/lodashify/test.json'
+        dest: 'test/actual/lodashify/mout.json'
+      },
+      mout_yaml: {
+        options: {format: 'yaml'},
+        src: 'test/mout',
+        dest: 'test/actual/lodashify/mout.yml'
+      },
+      bootstrap: {
+        src: 'test/fixtures/bootstrap',
+        dest: 'test/actual/bootstrap/bootstrap.json'
+      },
+      bootstrap_yaml: {
+        options: {format: 'yaml'},
+        src: 'test/fixtures/bootstrap',
+        dest: 'test/actual/bootstrap/bootstrap.yml'
       }
     },
 
