@@ -1,4 +1,5 @@
 node_modules
+vendor
 npm-debug.log
 tmp
 TODO.md
