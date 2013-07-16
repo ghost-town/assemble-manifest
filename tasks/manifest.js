@@ -28,11 +28,14 @@ module.exports = function(grunt) {
       // Misc
       manifestrc: [],
       debug: false,
-      
+
       // Formatting
       format: 'json',
       sorted: false,
       indent: 2,
+
+      // Collections
+      collections: {},
 
       // Metadata
       metadata: [],

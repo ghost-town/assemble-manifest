@@ -49,31 +49,24 @@ grunt.initConfig({
 
 
 ### Options
-_Documentation forthcoming_
 
-#### format
+#### manifestrc
 Type: `String`
-Default: `json`
+Default value: `null`
 
-Option to specify output format for dest files. Case insensitive, and may be either YAML or JSON format. Any of the following will work:
+If a `.manifestrc` file is specified, any options defined therein will be used. The `.manifestrc` file must be valid JSON and looks something like this:
 
-* `'yml'`, `'yaml'`, `'YML'`, `'YAML'`
-* `'json'`, `'JSON'` (although these are uncessary since the task defaults to json)
-
-
-#### sorted
-Type: `Boolean`
-Default: `false`
-
-Sorts ouput objects and properties in alphabetical order.
-
-
-#### indent
-Type: `Number`
-Default: `2`
-
-Number of spaces to indent the output. Currently only works for `.json` files, not `.yml`.
-
+```json
+{
+  "indent": 2,
+  "sorted": true,
+  "metadata": [],
+  "exclude": [
+    "firstKey",
+    "secondKey"
+  ]
+}
+```
 
 #### debug
 Type: `Boolean`
@@ -82,51 +75,51 @@ Default: `false`
 When set to `true`, the output will include all omitted properties for inspection.
 
 
-## Collections
-Type: `Arrays|Objects`
-Default: `documents|fonts|images|javascripts|markdown|styles|templates`
+#### format
+Type: `String`
+Default: `json`
 
-> Generate arrays of files with specific extensions from given source directories. 
+Option to specify output format for dest files. Case insensitive, and may be either YAML or JSON format. Any of the following will work:
 
-Currently limited to file types defined in the code. We realize this part of the task is somewhat hard-coded for our own usage, so the plan is to allow collections and extensions to be user-defined, through the task and target options. 
+#### sorted
+Type: `Boolean`
+Default: `false`
 
-By default, currently the task will build the following types of collections, and with the specified extensions for each collection:
+Sorts ouput objects and properties in alphabetical order.
 
-#### documents
-`.md` | `.txt` | `.doc` | `.docx` | `.pdf`
+#### indent
+Type: `Number`
+Default: `2`
 
-#### fonts
-`.eot` | `.svg` | `.otf` | `.ttf` | `.woff` 
+Number of spaces to indent the output. Currently only works for `.json` files, not `.yml`.
 
-#### images
-`.ico` | `.png` | `.gif` | `.jpg` 
+## collections
+Type: `Object`
+Default: `null`
 
-#### javascripts
-`.js` | `.coffee`
+Build collections (arrays) of files with specific extensions from given source directories.
 
-#### markdown
-`.md` | `.markd` | `.markdown`
-
-#### styles
-`.css` | `.less` | `.stylus` | `.sass` | `.scss` 
-
-#### templates
-`.hbs` | `.hbr` | `.handlebars` | `.html` | `.htm` | `.mustache` | `.tmpl` 
-
-
-To build a specific collection, just add the extension pattern(s) for the `src` files you want to add to your dest file(s). For pre-defined collections, you don't need to do anything to explicity add the collection itself, the task takes care of that for you. For example:
+To build a specific collection, just add the collection to the `collections` object, then define the pattern(s) for files that should be included in the collection. specify the extension pattern(s) for the `src` files you want to add to your dest file(s). For pre-defined collections, you don't need to do anything to explicity add the collection itself, the task takes care of that for you. For example:
 
 ``` js
 images: {
   options: {
     name: 'Image Manifest'
+    collections: {
+      "images": [
+        "jpg",
+        "png",
+        "gif"
+      ]
+    }
   },
   files: {
-    'dest/images.json': ['assets/img/**/*.{jpg,png,gif}'],
+    'dest/images.json': ['assets/**/*.*'],
   }
 }
 ```
-Will yield an `images` collection that includes an array of files with the extensions specified in the `files` object:
+
+Will yield an `images` collection that includes an array of files that match the extensions specified in the collection:
 
 Output: `images.json`
 
@@ -135,9 +128,9 @@ Output: `images.json`
   "images": [
     "assets/img/one.jpg",
     "assets/img/two.jpg",
-    "assets/img/three.jpg",
-    "assets/img/icons/icon-a.jpg",
-    "assets/img/icons/icon-b.jpg",
+    "assets/img/three.gif",
+    "assets/img/icons/icon-a.png",
+    "assets/img/icons/icon-b.png",
     ...
   ]
 }
@@ -146,19 +139,19 @@ Output: `images.json`
 ### Usage Examples
 See some of the [example manifests](https://github.com/assemble/assemble-manifest/tree/master/test/actual) generated with this task.
 
-Let's say the goal is to build a `component.json` from a `package.json`. We could: 
+Let's say the goal is to build a `component.json` from a `package.json`. We could:
 
  * Do a one-to-one transfer of objects and properties
- * Override any objects or properties in the options by simply adding the new value to the options. 
+ * Override any objects or properties in the options by simply adding the new value to the options.
  * Remove any objects or properties in the options by making the value `undefined` (this is a quick fix, will revisit but it works for now.)
  * Define new objects and properties in the options block.
- 
+
 ``` js
 manifest: {
   options: {
     metadata: 'metadata.json', // optional source of metatdata
     name: 'assemble-manifest'
-    version: '0.1.0'           
+    version: '0.1.0'
     description: 'Generates JSON and/or YAML manifest files from given source files or directories or source files.'
   },
   // build component.json from package.json
